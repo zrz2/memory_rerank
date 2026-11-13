@@ -1,0 +1,29 @@
+{
+  "scope": "six_question_candidate_reranking_pilot",
+  "candidate_n": 20,
+  "ks": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "chunk_tokens": 200,
+  "chunk_stride": 160,
+  "memory_view_max_chars": 1600,
+  "decay": 0.995,
+  "budget_cny": 5,
+  "max_api_calls": 12,
+  "max_output_tokens": 1200,
+  "budget_input_cny_per_million": 10,
+  "budget_output_cny_per_million": 30,
+  "pricing_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+  "pricing_checked_on": "2026-11-13",
+  "observed_flash_peak_input_cny_per_million": 2,
+  "observed_flash_peak_output_cny_per_million": 8,
+  "seed": 20261113,
+  "notes": [
+    "Budget uses conservative rates above both currently documented models, byte upper bound plus framing reserve, no automatic retries.",
+    "Candidates have opaque aliases. Model never receives dataset IDs, gold labels or reference answers.",
+    "Importance is query-independent scoring of a fixed prefix view; candidate selection is query-dependent. Not full GA reproduction."
+  ]
+}
