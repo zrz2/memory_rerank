@@ -70,3 +70,29 @@ def test_duplicate_ids_rejected():
     ms = [memory("a", NOW), memory("a", NOW)]
     with pytest.raises(ValueError): rank(ms, {"a": 1}, Q, "semantic")
     with pytest.raises(ValueError): evaluate(["a", "a"], {"relevance_grades": {"a": 1}}, 2)
+
+
+def test_gold_labels_do_not_change_ranking():
+    ms = [memory("a", NOW), memory("b", NOW)]
+    q1 = {**Q, "relevance_grades": {"a": 3}}
+    q2 = {**Q, "relevance_grades": {"b": 3}}
+    assert rank(ms, {"a": .2, "b": .3}, q1, "ga_paper_score") == rank(ms, {"a": .2, "b": .3}, q2, "ga_paper_score")
+
+
+def test_stable_id_tiebreak_and_timezone_equivalence():
+    ms = [memory("b", NOW), memory("a", "2026-11-13T04:00:00+00:00")]
+    assert [r["memory_id"] for r in rank(ms, {"a": .5, "b": .5}, Q, "semantic_recency")] == ["a", "b"]
+
+
+def test_metrics_distinguish_multi_evidence_coverage():
+    q = {"relevance_grades": {"a": 3, "b": 3}, "required_evidence_sets": [["a", "b"]]}
+    r = evaluate(["a", "x"], q, 2)
+    assert r["mrr"] == 1 and r["recall"] == .5 and r["complete_evidence"] == 0
+
+
+def test_history_filter_and_knowledge_cutoff_are_different():
+    old = memory("old", "2026-10-01T00:00:00+08:00", valid_to="2026-11-01T00:00:00+08:00")
+    future = memory("future", "2026-11-14T00:00:00+08:00", valid_from="2026-10-01T00:00:00+08:00")
+    q = {**Q, "target_time": "2026-10-15T00:00:00+08:00"}
+    rows = rank([old, future], {"old": .3, "future": .9}, q, "ga_task_validity_oracle")
+    assert [r["memory_id"] for r in rows] == ["old"]

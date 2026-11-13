@@ -1,0 +1,60 @@
+[
+  {
+    "question_id": "6a1eabeb",
+    "question_type": "knowledge-update",
+    "question": "What was my personal best time in the charity 5K run?",
+    "question_date": "2023/06/25 (Sun) 13:22",
+    "answer_session_ids": [
+      "answer_a25d4a91_1",
+      "answer_a25d4a91_2"
+    ]
+  },
+  {
+    "question_id": "0a995998",
+    "question_type": "multi-session",
+    "question": "How many items of clothing do I need to pick up or return from a store?",
+    "question_date": "2023/02/15 (Wed) 23:50",
+    "answer_session_ids": [
+      "answer_afa9873b_2",
+      "answer_afa9873b_3",
+      "answer_afa9873b_1"
+    ]
+  },
+  {
+    "question_id": "7161e7e2",
+    "question_type": "single-session-assistant",
+    "question": "I'm checking our previous chat about the shift rotation sheet for GM social media agents. Can you remind me what was the rotation for Admon on a Sunday?",
+    "question_date": "2023/05/30 (Tue) 20:16",
+    "answer_session_ids": [
+      "answer_sharegpt_5Lzox6N_0"
+    ]
+  },
+  {
+    "question_id": "8a2466db",
+    "question_type": "single-session-preference",
+    "question": "Can you recommend some resources where I can learn more about video editing?",
+    "question_date": "2023/05/30 (Tue) 22:03",
+    "answer_session_ids": [
+      "answer_edb03329"
+    ]
+  },
+  {
+    "question_id": "e47becba",
+    "question_type": "single-session-user",
+    "question": "What degree did I graduate with?",
+    "question_date": "2023/05/30 (Tue) 23:40",
+    "answer_session_ids": [
+      "answer_280352e9"
+    ]
+  },
+  {
+    "question_id": "gpt4_59149c77",
+    "question_type": "temporal-reasoning",
+    "question": "How many days passed between my visit to the Museum of Modern Art (MoMA) and the 'Ancient Civilizations' exhibit at the Metropolitan Museum of Art?",
+    "question_date": "2023/02/01 (Wed) 10:20",
+    "answer_session_ids": [
+      "answer_d00ba6d0_1",
+      "answer_d00ba6d0_2"
+    ]
+  }
+]
