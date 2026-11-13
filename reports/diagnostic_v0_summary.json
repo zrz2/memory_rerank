@@ -1,0 +1,152 @@
+{
+  "source_run": "runs\\diagnostic_v0.json",
+  "sha256": "cdc5a269e938860d1654e429cfdc30fa1572ad045efa004f31a875947740ce3e",
+  "scope": "pipeline_smoke_only",
+  "encoder_stats": {
+    "texts": 31,
+    "cache_hits": 31,
+    "computed": 0,
+    "truncated_texts": 0,
+    "encode_seconds": 0.0,
+    "external_api_calls": 0
+  },
+  "git_head_of_run": "3a85dd27f28d20ae2a44a0b012cbe8f226268973",
+  "git_dirty_of_run": false,
+  "metrics": [
+    {
+      "method": "ga_paper_score",
+      "k": 1,
+      "answerable_queries": 9,
+      "recall": 0.3333333333333333,
+      "mrr": 0.3333333333333333,
+      "ndcg": 0.3333333333333333,
+      "complete_evidence": 0.3333333333333333
+    },
+    {
+      "method": "ga_paper_score",
+      "k": 3,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.6481481481481481,
+      "ndcg": 0.7294510342143724,
+      "complete_evidence": 1.0
+    },
+    {
+      "method": "ga_paper_score",
+      "k": 5,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.6481481481481481,
+      "ndcg": 0.7294510342143724,
+      "complete_evidence": 1.0
+    },
+    {
+      "method": "ga_task_oracle",
+      "k": 1,
+      "answerable_queries": 9,
+      "recall": 0.5,
+      "mrr": 0.5555555555555556,
+      "ndcg": 0.4603174603174603,
+      "complete_evidence": 0.4444444444444444
+    },
+    {
+      "method": "ga_task_oracle",
+      "k": 3,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.7777777777777778,
+      "ndcg": 0.7903804834477638,
+      "complete_evidence": 1.0
+    },
+    {
+      "method": "ga_task_oracle",
+      "k": 5,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.7777777777777778,
+      "ndcg": 0.7903804834477638,
+      "complete_evidence": 1.0
+    },
+    {
+      "method": "ga_task_validity_oracle",
+      "k": 1,
+      "answerable_queries": 9,
+      "recall": 0.8333333333333334,
+      "mrr": 0.8888888888888888,
+      "ndcg": 0.7936507936507936,
+      "complete_evidence": 0.7777777777777778
+    },
+    {
+      "method": "ga_task_validity_oracle",
+      "k": 3,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.9444444444444444,
+      "ndcg": 0.9134038989239446,
+      "complete_evidence": 1.0
+    },
+    {
+      "method": "ga_task_validity_oracle",
+      "k": 5,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.9444444444444444,
+      "ndcg": 0.9134038989239446,
+      "complete_evidence": 1.0
+    },
+    {
+      "method": "semantic",
+      "k": 1,
+      "answerable_queries": 9,
+      "recall": 0.6111111111111112,
+      "mrr": 0.6666666666666666,
+      "ndcg": 0.5714285714285714,
+      "complete_evidence": 0.5555555555555556
+    },
+    {
+      "method": "semantic",
+      "k": 3,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.8333333333333334,
+      "ndcg": 0.8447332224568043,
+      "complete_evidence": 1.0
+    },
+    {
+      "method": "semantic",
+      "k": 5,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.8333333333333334,
+      "ndcg": 0.8447332224568043,
+      "complete_evidence": 1.0
+    },
+    {
+      "method": "semantic_recency",
+      "k": 1,
+      "answerable_queries": 9,
+      "recall": 0.5,
+      "mrr": 0.5555555555555556,
+      "ndcg": 0.4603174603174603,
+      "complete_evidence": 0.4444444444444444
+    },
+    {
+      "method": "semantic_recency",
+      "k": 3,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.7777777777777778,
+      "ndcg": 0.7903804834477638,
+      "complete_evidence": 1.0
+    },
+    {
+      "method": "semantic_recency",
+      "k": 5,
+      "answerable_queries": 9,
+      "recall": 1.0,
+      "mrr": 0.7777777777777778,
+      "ndcg": 0.7903804834477638,
+      "complete_evidence": 1.0
+    }
+  ]
+}

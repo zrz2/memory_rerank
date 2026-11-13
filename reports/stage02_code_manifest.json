@@ -1,0 +1,15 @@
+{
+  "checked_on": "2026-11-13",
+  "python": "3.12.8",
+  "base_implementation_commit": "3a85dd2",
+  "files": {
+    "src/memory_rerank/scoring.py": "02b7d85bd0895993870898b9e40d0f2bdb09301d7b2c6139816d61a3836d1975",
+    "src/memory_rerank/metrics.py": "ee238905d0c7cba72be877b0a863d865b3e157323221c811f165713347801174",
+    "src/memory_rerank/embeddings.py": "ed20ef424429bebc6f7d3261f52a724c17c937684cd6ad327fb5191c3abe9fc0",
+    "scripts/run_longmemeval_smoke.py": "5a1b7435f09e2faec8883b5fcc0ae7f1c39a30f66f1954e8c7fed20e4f1923db",
+    "scripts/run_diagnostic.py": "dedf3ce9c2672a43c9d97678f14758232ffc8df58c92f01021d417981e51ac67",
+    "configs/embedding_model.json": "fd3622bf87c378fff366a9bc58b1c6c7184c663ba15547f87276280690648710",
+    "data/splits/longmemeval_smoke_ids.json": "80c1c604696e97b658d6f3a48e55635679b0b2f9b989fe0f4f81a95ad2b95424",
+    "data/diagnostic/tasks_v0.json": "e9a902171c9603344eb8e1d37004b2be38cc195fa2a6af141dc30663b84fb3a9"
+  }
+}
