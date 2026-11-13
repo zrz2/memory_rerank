@@ -9,8 +9,8 @@
 ## 资料
 
 - [实施方案](docs/implementation_plan.md)
-- [GA 核心笔记](docs/papers/generative_agents_core.md)
-- [GA 证据与复现方案](docs/papers/generative_agents_evidence.md)
+- 原有 `../记忆调研` 中的 GA 演示和笔记已被用户判定为错误、不实际，本项目不引用。
+- 新的 GA 笔记将在基线实现和官方来源复核后重写。
 
 ## 阶段
 

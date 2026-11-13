@@ -1,0 +1,7 @@
+# Install torch separately using the CPU wheel index; see scripts/setup.ps1.
+numpy==1.26.4
+scikit-learn==1.6.1
+sentence-transformers==4.1.0
+transformers==4.51.3
+huggingface-hub==0.30.2
+pytest==8.3.5
