@@ -1,4 +1,4 @@
-"""Pinned local multilingual E5 inference with content-addressed vector caching."""
+"""Pinned local embedding inference with model-specific vector caching."""
 from __future__ import annotations
 import hashlib
 import json
@@ -20,9 +20,11 @@ class DenseEncoder:
         import torch
         torch.set_num_threads(min(4, os.cpu_count() or 1))
         torch.manual_seed(0)
-        self.model = SentenceTransformer(str(root / ".cache/models/multilingual-e5-small"),
-                                         device="cpu", local_files_only=True)
+        self.model = SentenceTransformer(str(root / self.config["local_path"]),
+                                         device=self.config["device"], local_files_only=True)
         self.model.max_seq_length = self.config["max_seq_length"]
+        if self.model.get_sentence_embedding_dimension() != self.config["expected_dimension"]:
+            raise ValueError("Unexpected model embedding dimension")
         self.cache = root / ".cache/embeddings"
         self.cache.mkdir(parents=True, exist_ok=True)
         self.stats = {"texts": 0, "cache_hits": 0, "computed": 0, "truncated_texts": 0,

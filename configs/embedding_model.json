@@ -1,10 +1,13 @@
 {
-  "model": "intfloat/multilingual-e5-small",
-  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "model": "BAAI/bge-m3",
+  "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "local_path": ".cache/models/bge-m3",
   "device": "cpu",
-  "batch_size": 8,
-  "max_seq_length": 256,
-  "query_prefix": "query: ",
-  "passage_prefix": "passage: ",
-  "reason": "Initial reproducible multilingual dense retrieval on 4GB GPU machine; not original GA embedding and not bge-m3."
+  "batch_size": 2,
+  "max_seq_length": 512,
+  "query_prefix": "",
+  "passage_prefix": "",
+  "mode": "dense_only",
+  "expected_dimension": 1024,
+  "reason": "User-selected Chinese/English BGE-M3; CPU baseline for 4GB GPU, 512-token operational cap, not architectural maximum."
 }

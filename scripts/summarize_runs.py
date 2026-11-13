@@ -25,7 +25,7 @@ def summarize(name):
             row[key] = mean(values) if values else None
         stats.append(row)
     summary = {"source_run": str(path.relative_to(ROOT)), "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-               "scope": "pipeline_smoke_only", "encoder_stats": data["encoder_stats"],
+               "scope": "pipeline_smoke_only", "model": data.get("model"), "encoder_stats": data["encoder_stats"],
                "git_head_of_run": data.get("git_head"), "git_dirty_of_run": data.get("git_dirty"),
                "metrics": stats}
     (ROOT / "reports" / f"{name}_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf8")
@@ -40,7 +40,7 @@ def summarize(name):
         lines.append(f"|{row['method']}|{row['k']}|{row['answerable_queries']}|" + "|".join(f"{row[k]:.4f}" for k in ["recall", "mrr", "ndcg", "complete_evidence"]) + "|")
     lines += ["", "## 运行口径", "", f"- 记录的编码状态：`{data['encoder_stats']}`。",
               f"- 原始逐题结果：`{summary['source_run']}`。", f"- 结果 SHA256：`{summary['sha256']}`。",
-              "- 纯语义使用真实本地 multilingual-e5-small 向量，不是 TF-IDF。",
+              f"- 本次运行记录的向量模型：`{data.get('model', '未记录')}`。",
               "- oracle 方法表示已给定正确任务标签／有效区间，不能与自动端到端方法混称。",
               "- 未用这些样本调参，后续需独立开发集、测试集与强重排对照。"]
     if name != "diagnostic_v0":

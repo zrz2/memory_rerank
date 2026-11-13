@@ -6,13 +6,14 @@ from pathlib import Path
 
 def fetch(url: str, dest: Path, size: int, expected_sha256: str | None = None):
     if dest.exists() and dest.stat().st_size == size:
-        digest = hashlib.sha256(dest.read_bytes()).hexdigest()
+        with dest.open('rb') as existing:
+            digest = hashlib.file_digest(existing, 'sha256').hexdigest()
         if expected_sha256 is None or digest == expected_sha256:
             return digest
     chunk = 1024 * 1024
     def part(start):
         end = min(size - 1, start + chunk - 1)
-        for attempt in range(4):
+        for attempt in range(6):
             try:
                 separator = '&' if '?' in url else '?'
                 req = urllib.request.Request(url + f'{separator}part={start}', headers={'Range':f'bytes={start}-{end}'})
@@ -23,14 +24,26 @@ def fetch(url: str, dest: Path, size: int, expected_sha256: str | None = None):
                         raise ValueError(f'Bad range: {resp.status}, {content_range}, bytes={len(data)}')
                 return data
             except Exception:
-                if attempt==3: raise
+                if attempt==5: raise
                 time.sleep(attempt+1)
     dest.parent.mkdir(parents=True,exist_ok=True)
     temporary=dest.with_suffix(dest.suffix+'.part')
+    # Resume previously validated complete ranges; verify final full-file hash.
+    resume = temporary.stat().st_size if temporary.exists() else 0
+    if resume > size:
+        raise ValueError('Partial file larger than source')
     h=hashlib.sha256()
-    with ThreadPoolExecutor(max_workers=4) as pool, temporary.open('wb') as out:
-        for block in pool.map(part,range(0,size,chunk)):
-            out.write(block);h.update(block)
+    if resume:
+        with temporary.open('rb') as existing:
+            while block := existing.read(chunk): h.update(block)
+    with ThreadPoolExecutor(max_workers=16) as pool, temporary.open('ab') as out:
+        # Bound buffered responses to 16 MiB even when an earlier range retries.
+        for batch_start in range(resume, size, 16 * chunk):
+            starts = range(batch_start, min(size, batch_start + 16 * chunk), chunk)
+            for block in pool.map(part, starts):
+                out.write(block);h.update(block)
+            out.flush()
+            print(f'Downloaded {out.tell()}/{size} bytes', flush=True)
     digest=h.hexdigest()
     if temporary.stat().st_size!=size or (expected_sha256 and digest!=expected_sha256):
         raise ValueError('File integrity check failed')

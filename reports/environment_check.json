@@ -1,0 +1,80 @@
+{
+  "checked_at": "2026-11-13T07:05:16.061544+00:00",
+  "python": "3.12.8",
+  "llm": {
+    "provider": "deepseek",
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-chat",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "temperature": 0,
+    "max_tokens": 512,
+    "timeout_seconds": 90,
+    "roles": [
+      "importance_scoring",
+      "llm_reranking",
+      "answer_generation",
+      "answer_judging"
+    ],
+    "note": "Same provider across experiment arms; local BGE-M3 handles embeddings. No silent OpenAI fallback. Store returned model and usage per call."
+  },
+  "api_key_present": true,
+  "git_name": "zrz2",
+  "git_email": "m13437876693_1@163.com",
+  "live_status": "passed",
+  "embedding_status": "passed",
+  "embedding": {
+    "config": {
+      "model": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "local_path": ".cache/models/bge-m3",
+      "device": "cpu",
+      "batch_size": 2,
+      "max_seq_length": 512,
+      "query_prefix": "",
+      "passage_prefix": "",
+      "mode": "dense_only",
+      "expected_dimension": 1024,
+      "reason": "User-selected Chinese/English BGE-M3; CPU baseline for 4GB GPU, 512-token operational cap, not architectural maximum."
+    },
+    "shape": [
+      3,
+      1024
+    ],
+    "norms": [
+      1.0,
+      1.0000001192092896,
+      0.9999998807907104
+    ],
+    "similarities": [
+      0.67521071434021,
+      0.6436280608177185,
+      0.3940644860267639
+    ],
+    "stats": {
+      "texts": 4,
+      "cache_hits": 0,
+      "computed": 4,
+      "truncated_texts": 0,
+      "encode_seconds": 0.5008465999853797,
+      "external_api_calls": 0
+    }
+  },
+  "live_response": {
+    "text": "OK",
+    "response_id": "654a0c6e-2f45-4c9a-b779-8e1b5adb3f6f",
+    "returned_model": "deepseek-flash",
+    "usage": {
+      "prompt_tokens": 9,
+      "completion_tokens": 1,
+      "total_tokens": 10,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 9
+    },
+    "finish_reason": "stop",
+    "elapsed_seconds": 0.7996515999839175,
+    "configured_model": "deepseek-chat"
+  }
+}

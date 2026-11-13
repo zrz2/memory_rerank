@@ -1,7 +1,8 @@
 {
-  "model": "intfloat/multilingual-e5-small",
-  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "model": "BAAI/bge-m3",
+  "revision": "5617a9f61b028005a4858fdac845db406aefb181",
   "license": "mit",
-  "source": "https://huggingface.co/intfloat/multilingual-e5-small",
-  "accessed_on": "2026-11-13"
+  "source": "https://huggingface.co/BAAI/bge-m3",
+  "accessed_on": "2026-11-13",
+  "mode": "dense-only"
 }

@@ -2,10 +2,11 @@
 import hashlib,json,urllib.request
 from pathlib import Path
 from download_longmemeval import fetch
-r=Path(__file__).resolve().parents[1];config=json.loads((r/'configs/embedding_model.json').read_text())
-model=config['model'];rev=config['revision'];folder=r/'.cache/models/multilingual-e5-small'
+r=Path(__file__).resolve().parents[1];config=json.loads((r/'configs/embedding_model.json').read_text(encoding='utf8'))
+model=config['model'];rev=config['revision'];folder=r/config['local_path']
 tree=json.load(urllib.request.urlopen(f'https://huggingface.co/api/models/{model}/tree/{rev}?recursive=true'))
-names={'1_Pooling/config.json','config.json','model.safetensors','modules.json','sentence_bert_config.json','sentencepiece.bpe.model','special_tokens_map.json','tokenizer.json','tokenizer_config.json','README.md'}
+weights='model.safetensors' if any(x['path']=='model.safetensors' for x in tree) else 'pytorch_model.bin'
+names={'1_Pooling/config.json','config.json',weights,'modules.json','config_sentence_transformers.json','sentence_bert_config.json','sentencepiece.bpe.model','special_tokens_map.json','tokenizer.json','tokenizer_config.json','README.md'}
 manifest=[]
 for item in tree:
  name=item['path']

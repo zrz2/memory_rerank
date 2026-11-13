@@ -1,0 +1,10 @@
+{
+  "model": "intfloat/multilingual-e5-small",
+  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "device": "cpu",
+  "batch_size": 8,
+  "max_seq_length": 256,
+  "query_prefix": "query: ",
+  "passage_prefix": "passage: ",
+  "reason": "Initial reproducible multilingual dense retrieval on 4GB GPU machine; not original GA embedding and not bge-m3."
+}

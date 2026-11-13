@@ -4,7 +4,7 @@
 
 ## 当前范围
 
-先复现记忆排序机制，不复现完整 Smallville。所有数据、缓存、环境和运行产物位于本项目下。原有 `../记忆调研` 资料保持原样，新项目会记录其已有成果与局限。
+先复现记忆排序机制，不复现完整 Smallville。所有数据、缓存、环境和运行产物位于本项目下。原有 `../记忆调研` 资料保持原样，本项目不沿用其中的演示、笔记和结果。
 
 ## 资料
 
@@ -24,18 +24,22 @@
 
 ## 运行
 
+**当前统一配置：DeepSeek `deepseek-chat` + 本地 `BAAI/bge-m3` dense embedding。** 详见 [环境说明](docs/environment.md)。早期 E5 小样本结果仅作为历史记录，不能直接当作当前配置成绩。
+
 在 PowerShell 中进入本目录。环境、模型、缓存和数据均位于 `E:/毕业论文/memory-rerank`。
 
 ```powershell
 cd E:/毕业论文/memory-rerank
 # 首次安装：
 ./scripts/setup.ps1
+# 编辑 .env 填写 DEEPSEEK_API_KEY（不提交 Git）
 # 首次恢复数据和模型（本机已完成下载）：
 ./.venv/Scripts/python.exe scripts/fetch_sources.py
 ./.venv/Scripts/python.exe scripts/download_longmemeval.py --include-s
 ./.venv/Scripts/python.exe scripts/download_model.py
 # 检查与运行：
 ./.venv/Scripts/python.exe -m pytest -q
+./.venv/Scripts/python.exe scripts/check_environment.py --embedding
 ./.venv/Scripts/python.exe scripts/run_diagnostic.py
 ./.venv/Scripts/python.exe scripts/run_longmemeval_smoke.py
 ./.venv/Scripts/python.exe scripts/summarize_runs.py
@@ -48,4 +52,4 @@ cd E:/毕业论文/memory-rerank
 - 10 个手工诊断任务仅验证流程，未独立人工复核；oracle 标签／时间版本不是自动方法。
 - LongMemEval 仅冻结六类各一道题做 smoke test，不是全 500 题结果。
 - 公开集没有 importance，暂用常数，GA-paper-score 在该设置下与语义+近因性排序相同，不能冒充完整 GA 复现。
-- 未进行任何付费 API 调用；未上传原始数据或推送远程仓库。
+- 已进行少量 DeepSeek 联通测试；尚未运行正式 LLM 评测。未上传原始数据或推送远程仓库。
