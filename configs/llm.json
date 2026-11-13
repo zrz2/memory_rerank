@@ -12,5 +12,8 @@
     "answer_generation",
     "answer_judging"
   ],
-  "note": "Same provider across experiment arms; local BGE-M3 handles embeddings. No silent OpenAI fallback. Store returned model and usage per call."
+  "note": "Same provider across experiment arms; local BGE-M3 handles embeddings. No silent OpenAI fallback. Store returned model and usage per call.",
+  "thinking": {
+    "type": "disabled"
+  }
 }

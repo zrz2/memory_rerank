@@ -33,7 +33,7 @@ def main():
             if saved['fingerprint'] != fingerprint: raise ValueError('Existing preparation config mismatch')
             print(qid, 'checkpoint exists', flush=True)
             continue
-        if encoder is None: encoder = DenseEncoder(ROOT)
+        if encoder is None: encoder = DenseEncoder(ROOT, batch_size=cfg["encoding_batch_size"], num_threads=cfg["encoding_threads"])
         start = time.perf_counter()
         query = {'text':item['question'], 'query_time':iso(item['question_date'])}
         memories, grades = [], {}
@@ -76,7 +76,7 @@ def main():
                  'truncated_candidate_ids':[m['id'] for m in candidates if len(m['content'])>cfg['memory_view_max_chars']],
                  'full_semantic':full_semantic,'full_semantic_recency':full_recency,'visible_turns':len(visible),
                  'chunks':len(chunks),'source_sha256':source_hash,'embedding_config':model,'protocol':cfg,
-                 'encoder_stats_delta':{k:encoder.stats[k]-before[k] for k in before},'elapsed_seconds':time.perf_counter()-start,
+                 'encoding_execution':encoder.execution,'encoder_stats_delta':{k:encoder.stats[k]-before[k] for k in before},'elapsed_seconds':time.perf_counter()-start,
                  'git_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
                  'git_dirty':bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())}
         target.write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding='utf8')

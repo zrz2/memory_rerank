@@ -1,0 +1,47 @@
+{
+  "scope": "16 long excerpts throughput probe only, not retrieval quality",
+  "results": [
+    {
+      "precision": "fp32",
+      "threads": 4,
+      "batch": 2,
+      "seconds": 11.034918699995615,
+      "min_cosine_vs_reference": 0.9999998807907104
+    },
+    {
+      "precision": "fp32",
+      "threads": 8,
+      "batch": 8,
+      "seconds": 6.1093175999994855,
+      "min_cosine_vs_reference": 0.9999998807907104
+    },
+    {
+      "precision": "fp32",
+      "threads": 12,
+      "batch": 8,
+      "seconds": 5.34976879999158,
+      "min_cosine_vs_reference": 0.9999999403953552
+    },
+    {
+      "precision": "fp32",
+      "threads": 4,
+      "batch": 8,
+      "seconds": 6.739840700000059,
+      "min_cosine_vs_reference": 0.9999999403953552
+    },
+    {
+      "precision": "int8_dynamic",
+      "threads": 4,
+      "batch": 8,
+      "seconds": 4.388467999990098,
+      "min_cosine_vs_reference": 0.9185242056846619
+    },
+    {
+      "precision": "int8_dynamic",
+      "threads": 8,
+      "batch": 8,
+      "seconds": 3.9351499999756925,
+      "min_cosine_vs_reference": 0.92829430103302
+    }
+  ]
+}

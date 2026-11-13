@@ -39,6 +39,8 @@ class DeepSeekClient:
         payload = {"model": self.config["model"], "messages": messages,
                    "temperature": self.config["temperature"], "stream": False,
                    "max_tokens": max_tokens or self.config["max_tokens"]}
+        if "thinking" in self.config:
+            payload["thinking"] = self.config["thinking"]
         request = urllib.request.Request(self.config["base_url"] + "/chat/completions",
                                          data=json.dumps(payload).encode("utf8"),
                                          headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},

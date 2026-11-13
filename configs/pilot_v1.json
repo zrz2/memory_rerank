@@ -25,5 +25,7 @@
     "Budget uses conservative rates above both currently documented models, byte upper bound plus framing reserve, no automatic retries.",
     "Candidates have opaque aliases. Model never receives dataset IDs, gold labels or reference answers.",
     "Importance is query-independent scoring of a fixed prefix view; candidate selection is query-dependent. Not full GA reproduction."
-  ]
+  ],
+  "encoding_batch_size": 8,
+  "encoding_threads": 12
 }

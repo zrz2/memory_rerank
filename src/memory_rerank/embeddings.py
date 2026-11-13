@@ -9,7 +9,7 @@ import numpy as np
 
 
 class DenseEncoder:
-    def __init__(self, root: Path):
+    def __init__(self, root: Path, *, batch_size: int | None = None, num_threads: int | None = None):
         self.root = root
         self.config = json.loads((root / "configs/embedding_model.json").read_text(encoding="utf8"))
         os.environ["HF_HOME"] = str(root / ".cache/huggingface")
@@ -18,7 +18,9 @@ class DenseEncoder:
         os.environ["TOKENIZERS_PARALLELISM"] = "false"
         from sentence_transformers import SentenceTransformer
         import torch
-        torch.set_num_threads(min(4, os.cpu_count() or 1))
+        self.execution = {"batch_size": batch_size or self.config["batch_size"],
+                          "num_threads": num_threads or min(4, os.cpu_count() or 1), "precision": "float32"}
+        torch.set_num_threads(self.execution["num_threads"])
         torch.manual_seed(0)
         self.model = SentenceTransformer(str(root / self.config["local_path"]),
                                          device=self.config["device"], local_files_only=True)
@@ -47,7 +49,7 @@ class DenseEncoder:
         self.stats["truncated_texts"] += sum(len(x) > self.config["max_seq_length"] for x in lengths)
         if missing:
             start = time.perf_counter()
-            batch = self.model.encode([inputs[i] for i in missing], batch_size=self.config["batch_size"],
+            batch = self.model.encode([inputs[i] for i in missing], batch_size=self.execution["batch_size"],
                                       normalize_embeddings=True, show_progress_bar=False, convert_to_numpy=True)
             self.stats["encode_seconds"] += time.perf_counter() - start
             for i, vector in zip(missing, batch):
