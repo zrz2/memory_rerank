@@ -1,0 +1,101 @@
+{
+  "checked_on": "2026-11-13",
+  "longmemeval_s_cleaned": {
+    "instances": 500,
+    "categories": {
+      "single-session-user": 70,
+      "multi-session": 133,
+      "single-session-preference": 30,
+      "temporal-reasoning": 133,
+      "knowledge-update": 78,
+      "single-session-assistant": 56
+    },
+    "abstention": 30,
+    "alignment_failures": [],
+    "missing_evidence_sessions": [],
+    "answerable_without_marked_turns": [],
+    "sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+    "file_bytes": 277383467
+  },
+  "locomo10": {
+    "conversations": 10,
+    "questions": 1986,
+    "categories": {
+      "2": 321,
+      "3": 96,
+      "1": 282,
+      "4": 841,
+      "5": 446
+    },
+    "missing_evidence_questions": 4,
+    "unresolved_evidence": [
+      {
+        "sample_id": "conv-26",
+        "question_index": 37,
+        "ids": [
+          "D8:6; D9:17"
+        ]
+      },
+      {
+        "sample_id": "conv-42",
+        "question_index": 58,
+        "ids": [
+          "D10:19"
+        ]
+      },
+      {
+        "sample_id": "conv-42",
+        "question_index": 88,
+        "ids": [
+          "D"
+        ]
+      },
+      {
+        "sample_id": "conv-43",
+        "question_index": 18,
+        "ids": [
+          "D:11:26"
+        ]
+      },
+      {
+        "sample_id": "conv-47",
+        "question_index": 38,
+        "ids": [
+          "D4:36"
+        ]
+      },
+      {
+        "sample_id": "conv-49",
+        "question_index": 31,
+        "ids": [
+          "D9:1 D4:4 D4:6"
+        ]
+      },
+      {
+        "sample_id": "conv-49",
+        "question_index": 38,
+        "ids": [
+          "D22:1 D22:2 D9:10 D9:11"
+        ]
+      },
+      {
+        "sample_id": "conv-49",
+        "question_index": 46,
+        "ids": [
+          "D21:18 D21:22 D11:15 D11:19"
+        ]
+      },
+      {
+        "sample_id": "conv-50",
+        "question_index": 69,
+        "ids": [
+          "D30:05"
+        ]
+      }
+    ],
+    "turns": 5882,
+    "image_turns": 910,
+    "duplicate_ids": [],
+    "sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4"
+  }
+}
