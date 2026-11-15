@@ -1,0 +1,637 @@
+{
+  "provenance": {
+    "paper": "arXiv:2504.19413v1 (2025-04-28); paper text: Code can be found at https://mem0.ai/research",
+    "official_repo": "https://github.com/mem0ai/mem0",
+    "tag": "v0.1.94",
+    "commit": "07ddd7cb4bd67962cf9a988d7b5c3f3920fad2d4",
+    "commit_date": "2025-04-26 16:22:20 +0530",
+    "source_path": "experiments\\mem0\\paper_mechanism\\vendor\\mem0_repo",
+    "loaded_from": "experiments\\mem0\\paper_mechanism\\vendor\\mem0_repo\\mem0\\__init__.py",
+    "source_note": "mem0/memory/main.py calls get_update_memory_messages and handles ADD/UPDATE/DELETE/NONE; retrieval limit is 5."
+  },
+  "run": {
+    "user_id": "paper_mechanism_user",
+    "embedder": "BAAI/bge-m3, 1024-d, CPU, local_files_only",
+    "vector_store": "Qdrant local on_disk",
+    "llm_config": "DeepSeek deepseek-chat via project adapter"
+  },
+  "conversation": [
+    {
+      "turn": 1,
+      "input": "I moved to Beijing in March 2025 and work at ByteDance.",
+      "decisions": [
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Moved to Beijing in March 2025",
+          "event": "ADD"
+        },
+        {
+          "id": "14244f31-c7e1-449f-8696-72ff5d318dda",
+          "memory": "Works at ByteDance",
+          "event": "ADD"
+        }
+      ],
+      "llm_responses": [
+        {
+          "response_text": "{\"facts\": [\"Moved to Beijing in March 2025\", \"Works at ByteDance\"]}",
+          "usage": {
+            "prompt_tokens": 695,
+            "completion_tokens": 22,
+            "total_tokens": 717,
+            "prompt_tokens_details": {
+              "cached_tokens": 512
+            },
+            "prompt_cache_hit_tokens": 512,
+            "prompt_cache_miss_tokens": 183
+          },
+          "returned_model": "deepseek-flash"
+        },
+        {
+          "response_text": "{\n  \"memory\": [\n    {\n      \"id\": \"0\",\n      \"text\": \"Moved to Beijing in March 2025\",\n      \"event\": \"ADD\"\n    },\n    {\n      \"id\": \"1\",\n      \"text\": \"Works at ByteDance\",\n      \"event\": \"ADD\"\n    }\n  ]\n}",
+          "usage": {
+            "prompt_tokens": 1548,
+            "completion_tokens": 71,
+            "total_tokens": 1619,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1548
+          },
+          "returned_model": "deepseek-flash"
+        }
+      ],
+      "memories_after": [
+        {
+          "id": "14244f31-c7e1-449f-8696-72ff5d318dda",
+          "memory": "Works at ByteDance",
+          "created_at": "2026-11-15T02:42:32.620168-08:00",
+          "updated_at": null
+        },
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Moved to Beijing in March 2025",
+          "created_at": "2026-11-15T02:42:32.572283-08:00",
+          "updated_at": null
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "input": "By the way, I am allergic to peanuts.",
+      "decisions": [
+        {
+          "id": "51928db4-159a-4278-ab77-8e5a675231e6",
+          "memory": "Allergic to peanuts",
+          "event": "ADD"
+        }
+      ],
+      "llm_responses": [
+        {
+          "response_text": "{\"facts\": [\"Allergic to peanuts\"]}",
+          "usage": {
+            "prompt_tokens": 689,
+            "completion_tokens": 10,
+            "total_tokens": 699,
+            "prompt_tokens_details": {
+              "cached_tokens": 512
+            },
+            "prompt_cache_hit_tokens": 512,
+            "prompt_cache_miss_tokens": 177
+          },
+          "returned_model": "deepseek-flash"
+        },
+        {
+          "response_text": "{\n  \"memory\": [\n    {\n      \"id\": \"0\",\n      \"text\": \"Works at ByteDance\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"1\",\n      \"text\": \"Moved to Beijing in March 2025\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"2\",\n      \"text\": \"Allergic to peanuts\",\n      \"event\": \"ADD\"\n    }\n  ]\n}",
+          "usage": {
+            "prompt_tokens": 1574,
+            "completion_tokens": 101,
+            "total_tokens": 1675,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024
+            },
+            "prompt_cache_hit_tokens": 1024,
+            "prompt_cache_miss_tokens": 550
+          },
+          "returned_model": "deepseek-flash"
+        }
+      ],
+      "memories_after": [
+        {
+          "id": "14244f31-c7e1-449f-8696-72ff5d318dda",
+          "memory": "Works at ByteDance",
+          "created_at": "2026-11-15T02:42:32.620168-08:00",
+          "updated_at": null
+        },
+        {
+          "id": "51928db4-159a-4278-ab77-8e5a675231e6",
+          "memory": "Allergic to peanuts",
+          "created_at": "2026-11-15T02:42:32.840159-08:00",
+          "updated_at": null
+        },
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Moved to Beijing in March 2025",
+          "created_at": "2026-11-15T02:42:32.572283-08:00",
+          "updated_at": null
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "input": "Actually, I relocated to Shanghai in June 2025; I live there now.",
+      "decisions": [
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Relocated to Shanghai in June 2025",
+          "event": "UPDATE",
+          "previous_memory": "Moved to Beijing in March 2025"
+        },
+        {
+          "id": "843041a4-b24e-4948-812f-76aab70ecfc9",
+          "memory": "Currently lives in Shanghai",
+          "event": "ADD"
+        }
+      ],
+      "llm_responses": [
+        {
+          "response_text": "{\"facts\": [\"Relocated to Shanghai in June 2025\", \"Currently lives in Shanghai\"]}",
+          "usage": {
+            "prompt_tokens": 696,
+            "completion_tokens": 21,
+            "total_tokens": 717,
+            "prompt_tokens_details": {
+              "cached_tokens": 512
+            },
+            "prompt_cache_hit_tokens": 512,
+            "prompt_cache_miss_tokens": 184
+          },
+          "returned_model": "deepseek-flash"
+        },
+        {
+          "response_text": "{\n  \"memory\": [\n    {\n      \"id\": \"0\",\n      \"text\": \"Relocated to Shanghai in June 2025\",\n      \"event\": \"UPDATE\",\n      \"old_memory\": \"Moved to Beijing in March 2025\"\n    },\n    {\n      \"id\": \"1\",\n      \"text\": \"Works at ByteDance\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"2\",\n      \"text\": \"Allergic to peanuts\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"3\",\n      \"text\": \"Currently lives in Shanghai\",\n      \"event\": \"ADD\"\n    }\n  ]\n}",
+          "usage": {
+            "prompt_tokens": 1601,
+            "completion_tokens": 146,
+            "total_tokens": 1747,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024
+            },
+            "prompt_cache_hit_tokens": 1024,
+            "prompt_cache_miss_tokens": 577
+          },
+          "returned_model": "deepseek-flash"
+        }
+      ],
+      "memories_after": [
+        {
+          "id": "14244f31-c7e1-449f-8696-72ff5d318dda",
+          "memory": "Works at ByteDance",
+          "created_at": "2026-11-15T02:42:32.620168-08:00",
+          "updated_at": null
+        },
+        {
+          "id": "51928db4-159a-4278-ab77-8e5a675231e6",
+          "memory": "Allergic to peanuts",
+          "created_at": "2026-11-15T02:42:32.840159-08:00",
+          "updated_at": null
+        },
+        {
+          "id": "843041a4-b24e-4948-812f-76aab70ecfc9",
+          "memory": "Currently lives in Shanghai",
+          "created_at": "2026-11-15T02:42:33.175310-08:00",
+          "updated_at": "2026-11-15T02:42:33.124504-08:00"
+        },
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Relocated to Shanghai in June 2025",
+          "created_at": "2026-11-15T02:42:32.572283-08:00",
+          "updated_at": "2026-11-15T02:42:33.124504-08:00"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "Correction: I never joined ByteDance.",
+      "decisions": [
+        {
+          "id": "14244f31-c7e1-449f-8696-72ff5d318dda",
+          "memory": "Works at ByteDance",
+          "event": "DELETE"
+        },
+        {
+          "id": "7cefd850-1802-47ff-8679-4c1fd4ae77ac",
+          "memory": "Never joined ByteDance",
+          "event": "ADD"
+        }
+      ],
+      "llm_responses": [
+        {
+          "response_text": "{\"facts\": [\"Never joined ByteDance\"]}",
+          "usage": {
+            "prompt_tokens": 688,
+            "completion_tokens": 11,
+            "total_tokens": 699,
+            "prompt_tokens_details": {
+              "cached_tokens": 512
+            },
+            "prompt_cache_hit_tokens": 512,
+            "prompt_cache_miss_tokens": 176
+          },
+          "returned_model": "deepseek-flash"
+        },
+        {
+          "response_text": "{\n  \"memory\": [\n    {\n      \"id\": \"0\",\n      \"text\": \"Works at ByteDance\",\n      \"event\": \"DELETE\"\n    },\n    {\n      \"id\": \"1\",\n      \"text\": \"Relocated to Shanghai in June 2025\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"2\",\n      \"text\": \"Currently lives in Shanghai\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"3\",\n      \"text\": \"Allergic to peanuts\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"4\",\n      \"text\": \"Never joined ByteDance\",\n      \"event\": \"ADD\"\n    }\n  ]\n}",
+          "usage": {
+            "prompt_tokens": 1607,
+            "completion_tokens": 159,
+            "total_tokens": 1766,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024
+            },
+            "prompt_cache_hit_tokens": 1024,
+            "prompt_cache_miss_tokens": 583
+          },
+          "returned_model": "deepseek-flash"
+        }
+      ],
+      "memories_after": [
+        {
+          "id": "51928db4-159a-4278-ab77-8e5a675231e6",
+          "memory": "Allergic to peanuts",
+          "created_at": "2026-11-15T02:42:32.840159-08:00",
+          "updated_at": null
+        },
+        {
+          "id": "7cefd850-1802-47ff-8679-4c1fd4ae77ac",
+          "memory": "Never joined ByteDance",
+          "created_at": "2026-11-15T02:42:33.412277-08:00",
+          "updated_at": null
+        },
+        {
+          "id": "843041a4-b24e-4948-812f-76aab70ecfc9",
+          "memory": "Currently lives in Shanghai",
+          "created_at": "2026-11-15T02:42:33.175310-08:00",
+          "updated_at": "2026-11-15T02:42:33.124504-08:00"
+        },
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Relocated to Shanghai in June 2025",
+          "created_at": "2026-11-15T02:42:32.572283-08:00",
+          "updated_at": "2026-11-15T02:42:33.124504-08:00"
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "input": "I am still allergic to peanuts.",
+      "decisions": [],
+      "llm_responses": [
+        {
+          "response_text": "{\"facts\": [\"Allergic to peanuts\"]}",
+          "usage": {
+            "prompt_tokens": 686,
+            "completion_tokens": 10,
+            "total_tokens": 696,
+            "prompt_tokens_details": {
+              "cached_tokens": 512
+            },
+            "prompt_cache_hit_tokens": 512,
+            "prompt_cache_miss_tokens": 174
+          },
+          "returned_model": "deepseek-flash"
+        },
+        {
+          "response_text": "{\n  \"memory\": [\n    {\n      \"id\": \"0\",\n      \"text\": \"Allergic to peanuts\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"1\",\n      \"text\": \"Currently lives in Shanghai\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"2\",\n      \"text\": \"Relocated to Shanghai in June 2025\",\n      \"event\": \"NONE\"\n    },\n    {\n      \"id\": \"3\",\n      \"text\": \"Never joined ByteDance\",\n      \"event\": \"NONE\"\n    }\n  ]\n}",
+          "usage": {
+            "prompt_tokens": 1606,
+            "completion_tokens": 131,
+            "total_tokens": 1737,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024
+            },
+            "prompt_cache_hit_tokens": 1024,
+            "prompt_cache_miss_tokens": 582
+          },
+          "returned_model": "deepseek-flash"
+        }
+      ],
+      "memories_after": [
+        {
+          "id": "51928db4-159a-4278-ab77-8e5a675231e6",
+          "memory": "Allergic to peanuts",
+          "created_at": "2026-11-15T02:42:32.840159-08:00",
+          "updated_at": null
+        },
+        {
+          "id": "7cefd850-1802-47ff-8679-4c1fd4ae77ac",
+          "memory": "Never joined ByteDance",
+          "created_at": "2026-11-15T02:42:33.412277-08:00",
+          "updated_at": null
+        },
+        {
+          "id": "843041a4-b24e-4948-812f-76aab70ecfc9",
+          "memory": "Currently lives in Shanghai",
+          "created_at": "2026-11-15T02:42:33.175310-08:00",
+          "updated_at": "2026-11-15T02:42:33.124504-08:00"
+        },
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Relocated to Shanghai in June 2025",
+          "created_at": "2026-11-15T02:42:32.572283-08:00",
+          "updated_at": "2026-11-15T02:42:33.124504-08:00"
+        }
+      ]
+    }
+  ],
+  "queries": {
+    "current_home": {
+      "query": "Where does the user live now?",
+      "results": [
+        {
+          "id": "843041a4-b24e-4948-812f-76aab70ecfc9",
+          "memory": "Currently lives in Shanghai",
+          "score": 0.7204613323411564,
+          "created_at": "2026-11-15T02:42:33.175310-08:00"
+        },
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Relocated to Shanghai in June 2025",
+          "score": 0.4609275044368025,
+          "created_at": "2026-11-15T02:42:32.572283-08:00"
+        },
+        {
+          "id": "51928db4-159a-4278-ab77-8e5a675231e6",
+          "memory": "Allergic to peanuts",
+          "score": 0.39128264180460515,
+          "created_at": "2026-11-15T02:42:32.840159-08:00"
+        },
+        {
+          "id": "7cefd850-1802-47ff-8679-4c1fd4ae77ac",
+          "memory": "Never joined ByteDance",
+          "score": 0.35565606071716743,
+          "created_at": "2026-11-15T02:42:33.412277-08:00"
+        }
+      ]
+    },
+    "history_home": {
+      "query": "Where did the user live before?",
+      "results": [
+        {
+          "id": "843041a4-b24e-4948-812f-76aab70ecfc9",
+          "memory": "Currently lives in Shanghai",
+          "score": 0.6149278044549065,
+          "created_at": "2026-11-15T02:42:33.175310-08:00"
+        },
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Relocated to Shanghai in June 2025",
+          "score": 0.4258036541253587,
+          "created_at": "2026-11-15T02:42:32.572283-08:00"
+        },
+        {
+          "id": "51928db4-159a-4278-ab77-8e5a675231e6",
+          "memory": "Allergic to peanuts",
+          "score": 0.4065218317741163,
+          "created_at": "2026-11-15T02:42:32.840159-08:00"
+        },
+        {
+          "id": "7cefd850-1802-47ff-8679-4c1fd4ae77ac",
+          "memory": "Never joined ByteDance",
+          "score": 0.3789925803182329,
+          "created_at": "2026-11-15T02:42:33.412277-08:00"
+        }
+      ]
+    },
+    "job": {
+      "query": "Where does the user work?",
+      "results": [
+        {
+          "id": "843041a4-b24e-4948-812f-76aab70ecfc9",
+          "memory": "Currently lives in Shanghai",
+          "score": 0.4806873026929269,
+          "created_at": "2026-11-15T02:42:33.175310-08:00"
+        },
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Relocated to Shanghai in June 2025",
+          "score": 0.3667503042680641,
+          "created_at": "2026-11-15T02:42:32.572283-08:00"
+        },
+        {
+          "id": "51928db4-159a-4278-ab77-8e5a675231e6",
+          "memory": "Allergic to peanuts",
+          "score": 0.3663990857989806,
+          "created_at": "2026-11-15T02:42:32.840159-08:00"
+        },
+        {
+          "id": "7cefd850-1802-47ff-8679-4c1fd4ae77ac",
+          "memory": "Never joined ByteDance",
+          "score": 0.25593175909903376,
+          "created_at": "2026-11-15T02:42:33.412277-08:00"
+        }
+      ]
+    },
+    "allergy": {
+      "query": "Which food should the user avoid?",
+      "results": [
+        {
+          "id": "51928db4-159a-4278-ab77-8e5a675231e6",
+          "memory": "Allergic to peanuts",
+          "score": 0.5065515396161011,
+          "created_at": "2026-11-15T02:42:32.840159-08:00"
+        },
+        {
+          "id": "7cefd850-1802-47ff-8679-4c1fd4ae77ac",
+          "memory": "Never joined ByteDance",
+          "score": 0.31093852084985096,
+          "created_at": "2026-11-15T02:42:33.412277-08:00"
+        },
+        {
+          "id": "843041a4-b24e-4948-812f-76aab70ecfc9",
+          "memory": "Currently lives in Shanghai",
+          "score": 0.29750977353593955,
+          "created_at": "2026-11-15T02:42:33.175310-08:00"
+        },
+        {
+          "id": "8ed1a6c1-4f8b-4ff4-8e77-f722523a5943",
+          "memory": "Relocated to Shanghai in June 2025",
+          "score": 0.25293871861700346,
+          "created_at": "2026-11-15T02:42:32.572283-08:00"
+        }
+      ]
+    }
+  },
+  "llm_calls": [
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.10233,
+      "usage": {
+        "prompt_tokens": 695,
+        "completion_tokens": 22,
+        "total_tokens": 717,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 183
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 1.0270136999897659
+    },
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.14322,
+      "usage": {
+        "prompt_tokens": 1548,
+        "completion_tokens": 71,
+        "total_tokens": 1619,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1548
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 0.8854120000032708
+    },
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.10215,
+      "usage": {
+        "prompt_tokens": 689,
+        "completion_tokens": 10,
+        "total_tokens": 699,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 177
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 0.5817938999971375
+    },
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.14385,
+      "usage": {
+        "prompt_tokens": 1574,
+        "completion_tokens": 101,
+        "total_tokens": 1675,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 550
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 0.7910480999853462
+    },
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.10243,
+      "usage": {
+        "prompt_tokens": 696,
+        "completion_tokens": 21,
+        "total_tokens": 717,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 184
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 0.8279572999454103
+    },
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.14475,
+      "usage": {
+        "prompt_tokens": 1601,
+        "completion_tokens": 146,
+        "total_tokens": 1747,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 577
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 1.3452363000251353
+    },
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.10215,
+      "usage": {
+        "prompt_tokens": 688,
+        "completion_tokens": 11,
+        "total_tokens": 699,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 176
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 0.7870104999747127
+    },
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.14488,
+      "usage": {
+        "prompt_tokens": 1607,
+        "completion_tokens": 159,
+        "total_tokens": 1766,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 583
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 0.9527389000286348
+    },
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.10209,
+      "usage": {
+        "prompt_tokens": 686,
+        "completion_tokens": 10,
+        "total_tokens": 696,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 174
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 0.738731799996458
+    },
+    {
+      "status": "response_saved",
+      "reserved_cny": 0.14489,
+      "usage": {
+        "prompt_tokens": 1606,
+        "completion_tokens": 131,
+        "total_tokens": 1737,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 582
+      },
+      "configured_model": "deepseek-chat",
+      "returned_model": "deepseek-flash",
+      "elapsed_seconds": 0.9642692999914289
+    }
+  ]
+}

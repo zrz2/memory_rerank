@@ -1,6 +1,6 @@
 # Mem0 2.2.1 复现细节（仅最新版）
 
-记录日期：2026-11-15。只记录 `mem0ai==2.2.1`；其他版本不在本文范围。本文不是论文 LOCOMO / Table 1 的复现，而是**机制级复现**：验证当前版本在“地址变更 + 历史查询”下实际执行什么操作、检索返回什么、旧事实是否排前。
+记录日期：2026-11-15。正文只记录 `mem0ai==2.2.1`；论文同期 `v0.1.94` 的四操作机制实测单独放在附录。本文不是论文 LOCOMO / Table 1 的复现，而是**机制级复现**：验证当前版本在“地址变更 + 历史查询”下实际执行什么操作、检索返回什么、旧事实是否排前。
 
 证据文件：
 
@@ -291,3 +291,70 @@ LLM 缓存保留时重跑不重复计费；缓存位于 `experiments/mem0/runs/a
 - [x] 记录账面预留与成本上界，不冒充实际扣款。
 - [x] 明确 dense-only、无 recency/有效期/任务项、无重排。
 - [x] 明确历史查询第 1 名不构成时间推理证据。
+
+## 12. 附录：论文同期 v0.1.94 四操作机制实测
+
+正文记录的是 `mem0ai==2.2.1`，它默认只 `ADD`。为展示论文 §2.1 / Appendix B Algorithm 1 的四操作设计，另用论文原文给出的官方仓库运行：
+
+| 项 | 值 |
+|---|---|
+| 论文代码入口 | 正文第 29 行：`Code can be found at: https://mem0.ai/research` |
+| 官方仓库 | <https://github.com/mem0ai/mem0> |
+| tag | `v0.1.94` |
+| commit | `07ddd7cb4bd67962cf9a988d7b5c3f3920fad2d4` |
+| commit 日期 | 2025-04-26 16:22:20 +0530 |
+| 选择依据 | arXiv v1（2025-04-28）前最后一个官方 tag；v0.1.95 发布于 2025-04-30 |
+
+入口：`experiments/mem0/paper_mechanism/run_four_ops.py`；结果：`experiments/mem0/results/paper_mechanism.json`。
+
+### 12.1 逐轮决策（5 轮英文对话）
+
+| 轮次 | 输入 | `add()` 返回的决策 | 原始 LLM 更新响应中的其他项 |
+|---:|---|---|---|
+| 1 | I moved to Beijing in March 2025 and work at ByteDance. | ADD 北京；ADD 字节 | — |
+| 2 | By the way, I am allergic to peanuts. | ADD 花生过敏 | 旧北京、旧字节 NONE |
+| 3 | Actually, I relocated to Shanghai in June 2025; I live there now. | UPDATE 北京→上海；ADD 当前住上海 | 字节、过敏 NONE |
+| 4 | Correction: I never joined ByteDance. | DELETE 字节；ADD 从未入职 | 上海两条、过敏 NONE |
+| 5 | I am still allergic to peanuts. | 空（全部 NONE） | 四条全部 NONE |
+
+`NONE` 只在原始响应里出现，`add()` 不把它放进返回值；结果 JSON 的 `llm_responses` 保留原文。
+
+### 12.2 最终记忆与检索
+
+第 4 轮后库中四条：`Never joined ByteDance`、`Allergic to peanuts`、`Relocated to Shanghai in June 2025`、`Currently lives in Shanghai`。
+
+| 查询 | 第 1 名 | 分数 |
+|---|---|---:|
+| Where does the user live now? | Currently lives in Shanghai | 0.7205 |
+| Where did the user live before? | Currently lives in Shanghai | 0.6149 |
+| Where does the user work? | Currently lives in Shanghai（无关） | 0.4807 |
+| Which food should the user avoid? | Allergic to peanuts | 0.5066 |
+
+**UPDATE 覆盖旧值**：北京被改写成上海，“以前住哪”也搜不到北京；**DELETE 物理删除**：字节条目消失，“在哪工作”无对应证据。这与论文“DELETE 会丢历史”的判断一致。
+
+### 12.3 调用与成本
+
+| 项 | 值 |
+|---|---:|
+| LLM 调用 | 10 次（5 轮 × 抽取 + 更新） |
+| prompt tokens | 11,390 |
+| completion tokens | 682 |
+| 账面预留 | 1.23274 元 |
+| 实际返回模型 | `deepseek-flash` |
+
+### 12.4 源码核对与差异
+
+| 观察 | 证据 |
+|---|---|
+| 抽取后检索旧记忆 `limit=5` | `mem0/memory/main.py:244` |
+| 调用四操作提示 | `mem0/memory/main.py:261` |
+| 处理 UPDATE / DELETE / NONE | `mem0/memory/main.py:302`、`:317`、`:326` |
+| 提示词列出四操作 | `mem0/configs/prompts.py:62-70` |
+
+**差异**：论文 §2.1 写更新阶段检索 `s=10`，v0.1.94 代码是 `limit=5`。本附录记录代码实际行为，不把 5 说成 10。
+
+### 12.5 不能宣称
+
+- 不是 LOCOMO / Table 1 复现；模型、数据、指标均不同。
+- 一次 5 轮机制演示不代表 Mem0 整体性能。
+- 该结果是“论文同期版本”的行为，不能直接等同于 2.2.1 的当前默认行为。

@@ -47,6 +47,7 @@
 | 内容 | 位置 |
 |---|---|
 | 复现细节与逐次结果 | [`experiments/mem0/REPRODUCTION.md`](experiments/mem0/REPRODUCTION.md) |
+| 论文同期 v0.1.94 四操作实测 | [`experiments/mem0/paper_mechanism/`](experiments/mem0/paper_mechanism/README.md) |
 | 最小示例入口 | [`experiments/mem0/code/run_smoke.py`](experiments/mem0/code/run_smoke.py) |
 | 诊断集入口 | [`experiments/mem0/code/run_project.py`](experiments/mem0/code/run_project.py) |
 | LLM 适配器（预算、缓存、账本） | [`experiments/mem0/code/mem0_adapter.py`](experiments/mem0/code/mem0_adapter.py) |

@@ -14,6 +14,8 @@
 | `runs/smoke/` | 最小示例的 Qdrant 向量库与 history.db |
 | `runs/project/` | 诊断集的 Qdrant 向量库与 history.db |
 | `runs/api/smoke/` | LLM 缓存与 `ledger.json` |
+| `paper_mechanism/` | 官方仓库 v0.1.94 四操作实测（论文同期版本） |
+| `results/paper_mechanism.json` | 四操作逐轮决策、检索结果与调用账本 |
 | `REPRODUCTION.md` | 2.2.1 逐次复现细节：配置、写入、逐条排名、token、延迟与成本 |
 
 Mem0 本体不在本目录，仍是 `.venv/Lib/site-packages/mem0/`；它是项目依赖，不复制。
@@ -40,7 +42,8 @@ PYTHONIOENCODING=utf-8 ./.venv/Scripts/python.exe experiments/mem0/code/run_proj
 
 ## 版本与口径
 
-- 固定 `mem0ai==2.2.1`；默认只 `ADD`，经典四操作提示仍在源码中但默认路径不调用。
+- 当前版本固定 `mem0ai==2.2.1`；默认只 `ADD`，经典四操作提示仍在源码中但默认路径不调用。
+- 论文同期 `v0.1.94` 的四操作实测另见 `paper_mechanism/`；两者分开报告，不能混为一谈。
 - 嵌入为本地 BGE-M3（CPU，1024 维）；LLM 为 DeepSeek。
 - 缺 spaCy/fastembed 时是 dense-only，BM25 与实体增益为 0。
 - 这些结果不冒充论文表 1；论文数字与本地结果不可直接横比。

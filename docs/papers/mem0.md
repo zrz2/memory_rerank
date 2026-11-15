@@ -47,9 +47,30 @@
 
 诊断集 `address_current` 同样复现：旧杭州 0.6122 排第 1，新上海 0.5710 排第 2，MRR = 0.5。只增策略下**过时事实排前**。
 
-论文描述的 DELETE/UPDATE 与 Mem0^g 的 invalid 标记提供另一种极端——删旧后历史查询无证据。但 2.2.1 默认不执行这些操作，本机没有旧版环境，因此这是**论文机制层面的概念对照**，不是本地实测。两种极端都说明：维护策略与排序器是耦合的。
+论文描述的 DELETE/UPDATE 与 Mem0^g 的 invalid 标记提供另一种极端——删旧后历史查询无证据。2.2.1 默认不执行这些操作；改用官方仓库论文同期 tag 后，已实测到 UPDATE 覆盖与 DELETE 删旧（见 §2.3）。两种极端都说明：维护策略与排序器是耦合的。
 
-### 2.3 检索怎么打分
+### 2.3 论文同期代码的四操作实测
+
+论文正文写明 `Code can be found at: https://mem0.ai/research`，该页面指向官方仓库 `https://github.com/mem0ai/mem0`。本课题用官方 tag `v0.1.94`（commit `07ddd7cb`，2025-04-26；arXiv v1 发布前最后一个 tag）实际运行，而不是只看 2.2.1。
+
+5 轮受控对话的实际决策：
+
+| 轮次 | 输入 | 决策 |
+|---:|---|---|
+| 1 | 搬到北京、在字节工作 | ADD 北京；ADD 字节 |
+| 2 | 花生过敏 | ADD 过敏；旧记忆 NONE |
+| 3 | 实际搬到上海 | **UPDATE** 北京→上海；ADD 当前住上海 |
+| 4 | 更正：从未入职字节 | **DELETE** 字节；ADD 从未入职 |
+| 5 | 仍然花生过敏 | 全部 **NONE** |
+
+四操作都真实出现；`NONE` 不出现在 `add()` 返回值里，只能从原始 LLM 响应看到。两个后果与本课题直接相关：
+
+- **UPDATE 覆盖旧值**：北京被改写成上海，“以前住哪”也搜不到北京，历史事实丢失；
+- **DELETE 物理删除**：字节条目消失，“在哪工作”没有对应证据。
+
+源码核对：`main.py:244` 检索 `limit=5`（论文 §2.1 写 `s=10`，存在版本差异）；`:261` 调四操作提示；`:302/:317/:326` 分别处理 UPDATE/DELETE/NONE。详细结果与调用账本见 `experiments/mem0/paper_mechanism/README.md`。
+
+### 2.4 检索怎么打分
 
 - 论文：稠密相似度取 top，交给 LLM 答题；没有重排器。
 - 2.2.1 源码：组合分 = 语义 + BM25 + 实体增益，**没有 recency 项、没有有效期项、没有任务相关性项**（`utils/scoring.py:57,101,118`）。
@@ -92,7 +113,7 @@ LOCOMO：10 段长对话，每段约 600 轮、平均 2.6 万 token，约 200 �
 
 ## 6. 复现、借鉴、比较，还是仅作背景？
 
-**比较。** 输出答案而非候选排名，不能作排序基线；作为“维护与冲突处理”的系统级对照。本地已复现 2.2.1：默认只增、过时事实可排前，数据与结果收在 `experiments/mem0/`，不追论文表 1 数字。逐次复现细节见 `experiments/mem0/REPRODUCTION.md`。
+**比较。** 输出答案而非候选排名，不能作排序基线；作为“维护与冲突处理”的系统级对照。本地已复现 2.2.1：默认只增、过时事实可排前；另用官方仓库论文同期 tag `v0.1.94` 实测四操作（UPDATE 覆盖、DELETE 删旧、NONE 不变）。数据与结果收在 `experiments/mem0/`，不追论文表 1 数字。逐次复现细节见 `experiments/mem0/REPRODUCTION.md`。
 
 **决策：这篇论文对本课题的用途是——作为“维护与冲突处理”的系统级对照基线，用来比较“删旧 / 只增 / 标记失效”三种策略如何改变当前查询与历史查询的候选池，从而界定重排器的可作用边界，而不是作为排序基线。**
 
@@ -120,9 +141,13 @@ LOCOMO：10 段长对话，每段约 600 轮、平均 2.6 万 token，约 200 �
 | 默认 `add` 走 V3 批量管线，提示固定“唯一操作是 ADD” | `memory/main.py:918`、`:944`；`configs/prompts.py:472` | 2.2.1 |
 | 经典四操作提示仍存在但默认路径不调用 | `configs/prompts.py:176–290`、`:406` | 2.2.1 |
 | 检索组合分 = 语义 + BM25 + 实体增益，无 recency/有效期 | `utils/scoring.py:57,101,118` | 2.2.1 |
+| 论文正文给出代码入口 `https://mem0.ai/research` → 官方 GitHub | 论文第 29 行 | 文档 |
+| 官方 tag `v0.1.94`（commit `07ddd7cb`）实测四操作 | `experiments/mem0/paper_mechanism/run_four_ops.py` | 0.1.94 |
+| 5 轮演示：UPDATE 北京→上海；DELETE 字节；第 5 轮全 NONE | `experiments/mem0/results/paper_mechanism.json` | 本地 |
+| 代码检索 `limit=5`，论文写 `s=10` | `mem0/memory/main.py:244` | 0.1.94 |
 | 最小示例 3 轮全 ADD；当前查询旧北京排第 1 | `experiments/mem0/results/smoke.json` | 本地 |
 | 诊断集 `address_current`：过时杭州第 1，MRR=0.5 | `experiments/mem0/results/project.json` | 本地 |
 | `address_history` 第 1 名来自文本相似，非时间推理 | `experiments/mem0/results/project.json` | 本地 |
 | 8 次 `add` → 6 次 LLM 调用，约 4.76 万输入 token | `experiments/mem0/runs/api/smoke/ledger.json` | 本地 |
 
-**不能由此得出**：本地数字不能与论文表 1 横比（模型、提示词、评测集均不同）；一次最小示例加两个诊断任务不能代表 Mem0 整体性能；2.2.1 缺 spaCy/fastembed 时为 dense-only，BM25 与实体增益为 0；`address_history` 的 MRR=1.0 不能解释为时间推理。
+**不能由此得出**：本地数字不能与论文表 1 横比（模型、提示词、评测集均不同）；一次最小示例、两个诊断任务与一次四操作机制演示不能代表 Mem0 整体性能；2.2.1 缺 spaCy/fastembed 时为 dense-only，BM25 与实体增益为 0；`address_history` 的 MRR=1.0 不能解释为时间推理；v0.1.94 用 `limit=5` 而非论文的 `s=10`，且非 LOCOMO 复现。
