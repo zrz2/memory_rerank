@@ -1,55 +1,94 @@
 # 智能体记忆检索重排序
 
-课题：融合语义、时效与任务相关性的智能体记忆检索重排序方法研究。
+课题：**融合语义、时效与任务相关性的智能体记忆检索重排序方法研究**。
 
-## 当前范围
+远程仓库：<https://github.com/zrz2/memory_rerank>
 
-先复现记忆排序机制，不复现完整 Smallville。所有数据、缓存、环境和运行产物位于本项目下。原有 `../记忆调研` 资料保持原样，本项目不沿用其中的演示、笔记和结果。
+## 课题目标
 
-## 资料
+设计并验证一个**离线、可复现的智能体记忆系统**，覆盖记忆的完整生命周期：
 
-- [实施方案](docs/implementation_plan.md)
-- 原有 `../记忆调研` 中的 GA 演示和笔记已被用户判定为错误、不实际，本项目不引用。
-- [重新整理的 GA 核心笔记](docs/papers/generative_agents.md)
-- [数据集选择与实测核验](docs/dataset_selection.md)
-- [进度与运行说明](docs/progress/02_baseline_smoke.md)
+```text
+多轮对话 / 文档
+   → L1 写入（抽取、来源、时间字段）
+   → L2 维护（valid_from/to、supersedes、冲突策略）
+   → L3 召回（BGE-M3 top-N；同一候选池）
+   → L4 重排（有效性约束 + 语义/近因/重要性/任务相关性）
+   → top-K 证据 → L5 指标 / 可选下游回答
+```
 
-## 阶段
+系统输入为多轮对话、查询时点 `t_q`、任务状态 `z` 和查询 `q`；输出 top-K 记忆证据。重点解决两类失败：
 
-1. 项目与资料归档。
-2. 数据集核验与统一数据格式。
-3. 最小基线、测试和真实运行结果。
+1. 语义相关但已失效，例如旧地址、已取消的计划；
+2. 语义不明显但影响当前决策，例如膝伤对酒店电梯需求的影响。
 
-当前尚未完成正式基准实验，不预先宣称方法性能。
+三个边界：
+
+- **系统完整，实验分层。** 存储、更新、检索、重排都要设计，但比较时一次只改变目标层；用“理想元数据 vs 自动管线”两层实验分别验证排序方法与系统误差。
+- **重排是最后一步评分，不是全部。** 上游表示、更新策略和候选构造决定重排上限；上游删掉历史，重排无法恢复。
+- **两种时间分开。** 访问近因性回答“多久没被用到”；事实有效性回答“在 `t_q` 是否成立”。`valid_from/valid_to` 是硬约束，不是普通加分项。
+
+本阶段（至 2026-12-21）目标：完成 10 段多轮玩具任务与三方案 demo（仅语义 / 语义+时效 / 语义+时效+任务标签），输出 Recall@K、MRR、NDCG@K、耗时与模型调用次数，并完成一个公开数据集的可行性检查。
+
+明确不做：完整产品、实时上下文分页、完整复现 Mem0 / Generative Agents、训练大模型，以及用 10 题宣称统计显著优势。
+
+## 笔记位置
+
+| 笔记 | 位置 |
+|---|---|
+| Generative Agents（三因子检索基线） | [`docs/papers/generative_agents.md`](docs/papers/generative_agents.md) |
+| MemGPT（当前状态 vs 原始证据） | [`docs/papers/memgpt.md`](docs/papers/memgpt.md) |
+| Mem0（维护与冲突处理） | [`docs/papers/mem0.md`](docs/papers/mem0.md) |
+
+## Mem0 复现位置
+
+只记录 `mem0ai==2.2.1` 最新版：
+
+| 内容 | 位置 |
+|---|---|
+| 复现细节与逐次结果 | [`experiments/mem0/REPRODUCTION.md`](experiments/mem0/REPRODUCTION.md) |
+| 最小示例入口 | [`experiments/mem0/code/run_smoke.py`](experiments/mem0/code/run_smoke.py) |
+| 诊断集入口 | [`experiments/mem0/code/run_project.py`](experiments/mem0/code/run_project.py) |
+| LLM 适配器（预算、缓存、账本） | [`experiments/mem0/code/mem0_adapter.py`](experiments/mem0/code/mem0_adapter.py) |
+| 结果 | [`experiments/mem0/results/`](experiments/mem0/results/) |
+| 目录说明与运行命令 | [`experiments/mem0/README.md`](experiments/mem0/README.md) |
+
+仓库中另有旧版 0.1.59 的四操作对照文件（`code/run_pipeline_demo.py`、`results/demo/`），仅作历史对照；最新版结论以 `REPRODUCTION.md` 为准。
+
+## 仓库结构
+
+```text
+docs/
+  implementation_plan.md      实施方案与阶段边界
+  NEXT.md                     唯一进度台账
+  papers/                     三篇核心笔记
+experiments/mem0/             Mem0 复现代码、结果与详细记录
+data/diagnostic/tasks_v0.json 共用的诊断任务与人工标签
+src/memory_rerank/            嵌入、打分、指标与 LLM 调用
+scripts/                      数据检查、运行与汇总脚本
+tests/                        公式、时间与指标测试
+```
 
 ## 运行
 
-**当前统一配置：DeepSeek `deepseek-chat` + 本地 `BAAI/bge-m3` dense embedding。** 详见 [环境说明](docs/environment.md)。早期 E5 小样本结果仅作为历史记录，不能直接当作当前配置成绩。
+当前统一配置：DeepSeek `deepseek-chat` + 本地 `BAAI/bge-m3` dense embedding。详见 [`docs/environment.md`](docs/environment.md)。
 
-在 PowerShell 中进入本目录。环境、模型、缓存和数据均位于 `E:/毕业论文/memory-rerank`。
-
-```powershell
-cd E:/毕业论文/memory-rerank
-# 首次安装：
-./scripts/setup.ps1
-# 编辑 .env 填写 DEEPSEEK_API_KEY（不提交 Git）
-# 首次恢复数据和模型（本机已完成下载）：
-./.venv/Scripts/python.exe scripts/fetch_sources.py
-./.venv/Scripts/python.exe scripts/download_longmemeval.py --include-s
-./.venv/Scripts/python.exe scripts/download_model.py
-# 检查与运行：
+```bash
+# 测试
 ./.venv/Scripts/python.exe -m pytest -q
-./.venv/Scripts/python.exe scripts/check_environment.py --embedding
-./.venv/Scripts/python.exe scripts/run_diagnostic.py
-./.venv/Scripts/python.exe scripts/run_longmemeval_smoke.py
-./.venv/Scripts/python.exe scripts/summarize_runs.py
+
+# Mem0 2.2.1 最小示例
+PYTHONIOENCODING=utf-8 ./.venv/Scripts/python.exe experiments/mem0/code/run_smoke.py
+
+# Mem0 2.2.1 诊断集
+PYTHONIOENCODING=utf-8 ./.venv/Scripts/python.exe experiments/mem0/code/run_project.py
 ```
 
-`runs/` 保存逐题结果，`reports/` 保存便于阅读的汇总。原始数据、模型和环境不进入 Git，下载脚本、固定版本、数据哈希和摘要进入 Git。
+需要 `.env` 中的 `DEEPSEEK_API_KEY`（不提交 Git）；嵌入模型在 `.cache/models/bge-m3`。`runs/` 与 `experiments/mem0/runs/` 是运行时向量库、缓存和账本，已被 `.gitignore` 排除，可按 `REPRODUCTION.md` 重建。
 
-## 当前结果的含义
+## 当前状态
 
-- 10 个手工诊断任务仅验证流程，未独立人工复核；oracle 标签／时间版本不是自动方法。
-- LongMemEval 仅冻结六类各一道题做 smoke test，不是全 500 题结果。
-- 公开集没有 importance，暂用常数，GA-paper-score 在该设置下与语义+近因性排序相同，不能冒充完整 GA 复现。
-- 已进行少量 DeepSeek 联通测试；尚未运行正式 LLM 评测。未上传原始数据或推送远程仓库。
+- 已完成：三篇核心笔记；Mem0 2.2.1 的最小示例与两个诊断任务复现。
+- 已有：10 个手工诊断任务、纯语义/近因性/GA 式打分与 Recall/MRR/NDCG 代码。
+- 尚未完成：10 段多轮玩具任务、L2 维护模块、正式公开基准实验、Cross-Encoder 对照与下游回答评测。
+- 现有结果仅用于流程验证与失败模式发现，不是正式论文结论；数字不可与 Mem0 论文 Table 1 横比。
