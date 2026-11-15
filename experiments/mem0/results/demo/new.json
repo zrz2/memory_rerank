@@ -1,0 +1,824 @@
+{
+  "engine": "new",
+  "mem0_file": "E:\\毕业论文\\memory-rerank\\.venv\\Lib\\site-packages\\mem0\\__init__.py",
+  "mem0_package_version": "2.2.1",
+  "mem0_metadata_version": "2.2.1",
+  "qdrant_client": "1.20.0",
+  "sentence_transformers": "4.1.0",
+  "embedding_model": "E:\\毕业论文\\memory-rerank\\.cache\\models\\bge-m3",
+  "turns": [
+    {
+      "turn": 1,
+      "input": "我住在北京。",
+      "events": [
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "event": "ADD",
+          "previous_memory": null,
+          "old_memory": null
+        }
+      ],
+      "raw": {
+        "results": [
+          {
+            "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+            "memory": "User lives in Beijing.",
+            "event": "ADD"
+          }
+        ]
+      },
+      "last_llm_output": {
+        "memory": [
+          {
+            "id": "0",
+            "text": "User lives in Beijing.",
+            "attributed_to": "user"
+          }
+        ]
+      },
+      "store": [
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "hash": "af13d2e03272b41c6730b583b650fe6f",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.723708+00:00",
+          "updated_at": "2026-11-15T07:18:35.723708+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "input": "我搬到上海了。",
+      "events": [
+        {
+          "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+          "memory": "User moved from Beijing to Shanghai around November 2026",
+          "event": "ADD",
+          "previous_memory": null,
+          "old_memory": null
+        }
+      ],
+      "raw": {
+        "results": [
+          {
+            "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+            "memory": "User moved from Beijing to Shanghai around November 2026",
+            "event": "ADD"
+          }
+        ]
+      },
+      "last_llm_output": {
+        "memory": [
+          {
+            "id": "0",
+            "text": "User moved from Beijing to Shanghai around November 2026",
+            "attributed_to": "user",
+            "linked_memory_ids": [
+              "0"
+            ]
+          }
+        ]
+      },
+      "store": [
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "hash": "af13d2e03272b41c6730b583b650fe6f",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.723708+00:00",
+          "updated_at": "2026-11-15T07:18:35.723708+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+          "memory": "User moved from Beijing to Shanghai around November 2026",
+          "hash": "5759709441e37d8e5a64f5ab7a922b69",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.966632+00:00",
+          "updated_at": "2026-11-15T07:18:35.966632+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "input": "我现在住上海浦东。",
+      "events": [
+        {
+          "id": "cfc4407e-b2bb-4f4d-b9e0-4ae256f591da",
+          "memory": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+          "event": "ADD",
+          "previous_memory": null,
+          "old_memory": null
+        }
+      ],
+      "raw": {
+        "results": [
+          {
+            "id": "cfc4407e-b2bb-4f4d-b9e0-4ae256f591da",
+            "memory": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+            "event": "ADD"
+          }
+        ]
+      },
+      "last_llm_output": {
+        "memory": [
+          {
+            "id": "0",
+            "text": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+            "attributed_to": "user",
+            "linked_memory_ids": [
+              "0",
+              "1"
+            ]
+          }
+        ]
+      },
+      "store": [
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "hash": "af13d2e03272b41c6730b583b650fe6f",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.723708+00:00",
+          "updated_at": "2026-11-15T07:18:35.723708+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+          "memory": "User moved from Beijing to Shanghai around November 2026",
+          "hash": "5759709441e37d8e5a64f5ab7a922b69",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.966632+00:00",
+          "updated_at": "2026-11-15T07:18:35.966632+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "cfc4407e-b2bb-4f4d-b9e0-4ae256f591da",
+          "memory": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+          "hash": "7dc8746dc8184e3506b2ccf72ecb59e2",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:36.246446+00:00",
+          "updated_at": "2026-11-15T07:18:36.246446+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "input": "我住浦东。",
+      "events": [],
+      "raw": {
+        "results": []
+      },
+      "last_llm_output": {
+        "memory": []
+      },
+      "store": [
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "hash": "af13d2e03272b41c6730b583b650fe6f",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.723708+00:00",
+          "updated_at": "2026-11-15T07:18:35.723708+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+          "memory": "User moved from Beijing to Shanghai around November 2026",
+          "hash": "5759709441e37d8e5a64f5ab7a922b69",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.966632+00:00",
+          "updated_at": "2026-11-15T07:18:35.966632+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "cfc4407e-b2bb-4f4d-b9e0-4ae256f591da",
+          "memory": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+          "hash": "7dc8746dc8184e3506b2ccf72ecb59e2",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:36.246446+00:00",
+          "updated_at": "2026-11-15T07:18:36.246446+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "input": "我现在住在上海浦东。",
+      "events": [],
+      "raw": {
+        "results": []
+      },
+      "last_llm_output": {
+        "memory": []
+      },
+      "store": [
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "hash": "af13d2e03272b41c6730b583b650fe6f",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.723708+00:00",
+          "updated_at": "2026-11-15T07:18:35.723708+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+          "memory": "User moved from Beijing to Shanghai around November 2026",
+          "hash": "5759709441e37d8e5a64f5ab7a922b69",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.966632+00:00",
+          "updated_at": "2026-11-15T07:18:35.966632+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "cfc4407e-b2bb-4f4d-b9e0-4ae256f591da",
+          "memory": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+          "hash": "7dc8746dc8184e3506b2ccf72ecb59e2",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:36.246446+00:00",
+          "updated_at": "2026-11-15T07:18:36.246446+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        }
+      ]
+    },
+    {
+      "turn": 6,
+      "input": "我之前在字节跳动工作。",
+      "events": [
+        {
+          "id": "b358f1bf-b0c9-4e78-8fee-fe1f9e857aa4",
+          "memory": "User previously worked at ByteDance (字节跳动), indicating a past employer before their current situation",
+          "event": "ADD",
+          "previous_memory": null,
+          "old_memory": null
+        }
+      ],
+      "raw": {
+        "results": [
+          {
+            "id": "b358f1bf-b0c9-4e78-8fee-fe1f9e857aa4",
+            "memory": "User previously worked at ByteDance (字节跳动), indicating a past employer before their current situation",
+            "event": "ADD"
+          }
+        ]
+      },
+      "last_llm_output": {
+        "memory": [
+          {
+            "id": "0",
+            "text": "User previously worked at ByteDance (字节跳动), indicating a past employer before their current situation",
+            "attributed_to": "user"
+          }
+        ]
+      },
+      "store": [
+        {
+          "id": "b358f1bf-b0c9-4e78-8fee-fe1f9e857aa4",
+          "memory": "User previously worked at ByteDance (字节跳动), indicating a past employer before their current situation",
+          "hash": "c468da991faac4c5d539264504f9cac3",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:36.796929+00:00",
+          "updated_at": "2026-11-15T07:18:36.796929+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "hash": "af13d2e03272b41c6730b583b650fe6f",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.723708+00:00",
+          "updated_at": "2026-11-15T07:18:35.723708+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+          "memory": "User moved from Beijing to Shanghai around November 2026",
+          "hash": "5759709441e37d8e5a64f5ab7a922b69",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.966632+00:00",
+          "updated_at": "2026-11-15T07:18:35.966632+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "cfc4407e-b2bb-4f4d-b9e0-4ae256f591da",
+          "memory": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+          "hash": "7dc8746dc8184e3506b2ccf72ecb59e2",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:36.246446+00:00",
+          "updated_at": "2026-11-15T07:18:36.246446+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        }
+      ]
+    },
+    {
+      "turn": 7,
+      "input": "其实我从来没在字节跳动工作过，那是我记错了。",
+      "events": [
+        {
+          "id": "7f85cfc4-8cf4-4271-8408-51e94689d833",
+          "memory": "User clarified that they never actually worked at ByteDance (字节跳动) — they had misremembered, correcting an earlier claim that they previously worked there",
+          "event": "ADD",
+          "previous_memory": null,
+          "old_memory": null
+        }
+      ],
+      "raw": {
+        "results": [
+          {
+            "id": "7f85cfc4-8cf4-4271-8408-51e94689d833",
+            "memory": "User clarified that they never actually worked at ByteDance (字节跳动) — they had misremembered, correcting an earlier claim that they previously worked there",
+            "event": "ADD"
+          }
+        ]
+      },
+      "last_llm_output": {
+        "memory": [
+          {
+            "id": "0",
+            "text": "User clarified that they never actually worked at ByteDance (字节跳动) — they had misremembered, correcting an earlier claim that they previously worked there",
+            "attributed_to": "user",
+            "linked_memory_ids": [
+              "0"
+            ]
+          }
+        ]
+      },
+      "store": [
+        {
+          "id": "7f85cfc4-8cf4-4271-8408-51e94689d833",
+          "memory": "User clarified that they never actually worked at ByteDance (字节跳动) — they had misremembered, correcting an earlier claim that they previously worked there",
+          "hash": "bc9256b996b5ef0a8c8516822cf8e695",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:37.069407+00:00",
+          "updated_at": "2026-11-15T07:18:37.069407+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "b358f1bf-b0c9-4e78-8fee-fe1f9e857aa4",
+          "memory": "User previously worked at ByteDance (字节跳动), indicating a past employer before their current situation",
+          "hash": "c468da991faac4c5d539264504f9cac3",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:36.796929+00:00",
+          "updated_at": "2026-11-15T07:18:36.796929+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "hash": "af13d2e03272b41c6730b583b650fe6f",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.723708+00:00",
+          "updated_at": "2026-11-15T07:18:35.723708+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+          "memory": "User moved from Beijing to Shanghai around November 2026",
+          "hash": "5759709441e37d8e5a64f5ab7a922b69",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:35.966632+00:00",
+          "updated_at": "2026-11-15T07:18:35.966632+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        },
+        {
+          "id": "cfc4407e-b2bb-4f4d-b9e0-4ae256f591da",
+          "memory": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+          "hash": "7dc8746dc8184e3506b2ccf72ecb59e2",
+          "metadata": null,
+          "created_at": "2026-11-15T07:18:36.246446+00:00",
+          "updated_at": "2026-11-15T07:18:36.246446+00:00",
+          "user_id": "demo_new",
+          "attributed_to": "user"
+        }
+      ]
+    }
+  ],
+  "searches": [
+    {
+      "query": "我现在住哪？",
+      "results": [
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "score": 0.625782040341017
+        },
+        {
+          "id": "cfc4407e-b2bb-4f4d-b9e0-4ae256f591da",
+          "memory": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+          "score": 0.6164244084103139
+        },
+        {
+          "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+          "memory": "User moved from Beijing to Shanghai around November 2026",
+          "score": 0.5227208636286276
+        },
+        {
+          "id": "b358f1bf-b0c9-4e78-8fee-fe1f9e857aa4",
+          "memory": "User previously worked at ByteDance (字节跳动), indicating a past employer before their current situation",
+          "score": 0.41935742930316566
+        },
+        {
+          "id": "7f85cfc4-8cf4-4271-8408-51e94689d833",
+          "memory": "User clarified that they never actually worked at ByteDance (字节跳动) — they had misremembered, correcting an earlier claim that they previously worked there",
+          "score": 0.4057213863695244
+        }
+      ]
+    },
+    {
+      "query": "我以前住哪？",
+      "results": [
+        {
+          "id": "bc39a426-e220-4b3e-ad45-867734c370f5",
+          "memory": "User lives in Beijing.",
+          "score": 0.5746305558091265
+        },
+        {
+          "id": "cfc4407e-b2bb-4f4d-b9e0-4ae256f591da",
+          "memory": "User currently lives in Pudong, Shanghai, having moved there from Beijing around November 2026",
+          "score": 0.5604703509904194
+        },
+        {
+          "id": "b358f1bf-b0c9-4e78-8fee-fe1f9e857aa4",
+          "memory": "User previously worked at ByteDance (字节跳动), indicating a past employer before their current situation",
+          "score": 0.537135934596764
+        },
+        {
+          "id": "bc4dc5b7-30b5-465b-8b26-4fbf45dde726",
+          "memory": "User moved from Beijing to Shanghai around November 2026",
+          "score": 0.4787976396226655
+        },
+        {
+          "id": "7f85cfc4-8cf4-4271-8408-51e94689d833",
+          "memory": "User clarified that they never actually worked at ByteDance (字节跳动) — they had misremembered, correcting an earlier claim that they previously worked there",
+          "score": 0.45642948783573
+        }
+      ]
+    }
+  ],
+  "ledger": {
+    "calls": [
+      {
+        "key": "9294aed97718b7fbf35402ed986bc54ad19571a0d1a832d3352a8711f33f96e2",
+        "reserved_cny": 0.08996,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 684,
+          "completion_tokens": 8,
+          "total_tokens": 692,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 684
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "9fc5cd9f0f94578efac57663b4ca83ea086422809fb47aa72313f9c51426ba44",
+        "reserved_cny": 0.13515,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 1428,
+          "completion_tokens": 25,
+          "total_tokens": 1453,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1428
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "42b6f8be2205152079e9be0f37df913a9a262a054d22dd959ce7bcd8db1f4b02",
+        "reserved_cny": 0.08999,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 685,
+          "completion_tokens": 9,
+          "total_tokens": 694,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 173
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "732774043c61a267d095550e050a1333da01831d272a46e3038c422b8030c525",
+        "reserved_cny": 0.13553,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 1443,
+          "completion_tokens": 35,
+          "total_tokens": 1478,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "prompt_cache_hit_tokens": 1024,
+          "prompt_cache_miss_tokens": 419
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "baa929fb885a3dfbbb59f239e7c2f8575bb4b42d4a4d61fd1130e069d93caba3",
+        "reserved_cny": 0.09005,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 685,
+          "completion_tokens": 9,
+          "total_tokens": 694,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 173
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "463cab309634cdbe4ab542943a9e0b93cef1fd206fc187ca9ff2bacadb5dccda",
+        "reserved_cny": 0.13559,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 1444,
+          "completion_tokens": 47,
+          "total_tokens": 1491,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "prompt_cache_hit_tokens": 1024,
+          "prompt_cache_miss_tokens": 420
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "86a5d90c22f0d3e6acc988fc1207accbd3718f729f9c526322ca0ac0cd595d23",
+        "reserved_cny": 0.08993,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 684,
+          "completion_tokens": 8,
+          "total_tokens": 692,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 172
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "4b16ca45d8a7c0cfd20346314635b45cf3bd00f48c71f134773836aa5a7d7e3e",
+        "reserved_cny": 0.13596,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 1458,
+          "completion_tokens": 65,
+          "total_tokens": 1523,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "prompt_cache_hit_tokens": 1024,
+          "prompt_cache_miss_tokens": 434
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "77083c34dc73fed2a69fb7660b3a7259ae8c1f1955784aa3348c5ad7733260b2",
+        "reserved_cny": 0.09008,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 685,
+          "completion_tokens": 9,
+          "total_tokens": 694,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 173
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "2d930556017115878fe077cf4e46ffa74fa7e6a625ff185295901c7490bfeff5",
+        "reserved_cny": 0.13602,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 1459,
+          "completion_tokens": 48,
+          "total_tokens": 1507,
+          "prompt_tokens_details": {
+            "cached_tokens": 1152
+          },
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 307
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "e02580c6558bc14cb73ddfa0c2795d4e2379dbf466fa903f5dd80c0fa13020a0",
+        "reserved_cny": 0.09011,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 686,
+          "completion_tokens": 10,
+          "total_tokens": 696,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 174
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "12da34f6a0efaef7986c50a7ff1bafe8ffe7f1fd97fa23949a64fe4b3456dd4b",
+        "reserved_cny": 0.13611,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 1460,
+          "completion_tokens": 69,
+          "total_tokens": 1529,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "prompt_cache_hit_tokens": 1024,
+          "prompt_cache_miss_tokens": 436
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "1d2deeee243485e25e8133aa1aa9d98fecfbaf79082586642e25685e8506c146",
+        "reserved_cny": 0.09044,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 694,
+          "completion_tokens": 12,
+          "total_tokens": 706,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 182
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "c0bd31ed28afd6156dc693739ec474b1aa0cb09acd76096333d9d08112c07dad",
+        "reserved_cny": 0.13666,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 1478,
+          "completion_tokens": 93,
+          "total_tokens": 1571,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "prompt_cache_hit_tokens": 1024,
+          "prompt_cache_miss_tokens": 454
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "f57953ec4cd63aaf6a4134f5bcb8adb0d5e388344b1d2b0439f38e54fbb45570",
+        "reserved_cny": 0.41037,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 7840,
+          "completion_tokens": 29,
+          "total_tokens": 7869,
+          "prompt_tokens_details": {
+            "cached_tokens": 7680
+          },
+          "prompt_cache_hit_tokens": 7680,
+          "prompt_cache_miss_tokens": 160
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "5e8bc25b41c362e1e847d06e0bc0b1dcd1f25dac7ece341c66d4f35bdf3aadcc",
+        "reserved_cny": 0.41119,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 7865,
+          "completion_tokens": 45,
+          "total_tokens": 7910,
+          "prompt_tokens_details": {
+            "cached_tokens": 7552
+          },
+          "prompt_cache_hit_tokens": 7552,
+          "prompt_cache_miss_tokens": 313
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "5e86ff6a623bbd81d194780e77159b4b8666301b11b0353f1c04dd644bb28abc",
+        "reserved_cny": 0.41243,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 7895,
+          "completion_tokens": 56,
+          "total_tokens": 7951,
+          "prompt_tokens_details": {
+            "cached_tokens": 7552
+          },
+          "prompt_cache_hit_tokens": 7552,
+          "prompt_cache_miss_tokens": 343
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "1c71564ddcdc5549c2a901676b60f4a0eb6a8796c9939bdeb11489352d0114d4",
+        "reserved_cny": 0.41393,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 7932,
+          "completion_tokens": 5,
+          "total_tokens": 7937,
+          "prompt_tokens_details": {
+            "cached_tokens": 7552
+          },
+          "prompt_cache_hit_tokens": 7552,
+          "prompt_cache_miss_tokens": 380
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "b61ef6790a658861c16a1ba3363f35ea26e6421803c6ffb37d26f8cece87b2f4",
+        "reserved_cny": 0.41431,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 7940,
+          "completion_tokens": 5,
+          "total_tokens": 7945,
+          "prompt_tokens_details": {
+            "cached_tokens": 7680
+          },
+          "prompt_cache_hit_tokens": 7680,
+          "prompt_cache_miss_tokens": 260
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "1b4abdbeefe690e4edb8bdc5044240fbffe8b346ebca1e686088bc97deea8579",
+        "reserved_cny": 0.41472,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 7949,
+          "completion_tokens": 44,
+          "total_tokens": 7993,
+          "prompt_tokens_details": {
+            "cached_tokens": 7808
+          },
+          "prompt_cache_hit_tokens": 7808,
+          "prompt_cache_miss_tokens": 141
+        },
+        "returned_model": "deepseek-flash"
+      },
+      {
+        "key": "dafe0d8e01edfbf432dfed9d1d42ccf9550a234dcdfa44ef0d8eb886135ebeeb",
+        "reserved_cny": 0.41688,
+        "status": "response_saved",
+        "usage": {
+          "prompt_tokens": 7996,
+          "completion_tokens": 65,
+          "total_tokens": 8061,
+          "prompt_tokens_details": {
+            "cached_tokens": 7808
+          },
+          "prompt_cache_hit_tokens": 7808,
+          "prompt_cache_miss_tokens": 188
+        },
+        "returned_model": "deepseek-flash"
+      }
+    ]
+  }
+}

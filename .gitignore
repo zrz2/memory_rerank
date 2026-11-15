@@ -10,6 +10,8 @@ data/processed/*
 !data/processed/.gitkeep
 runs/*
 !runs/.gitkeep
+experiments/mem0/runs/
+experiments/mem0/vendor/mem0_059/
 .env
 .env.*
 !.env.example

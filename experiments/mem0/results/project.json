@@ -1,0 +1,345 @@
+{
+  "versions": {
+    "mem0ai": "2.2.1",
+    "qdrant-client": "1.20.0",
+    "sentence-transformers": "4.1.0",
+    "embedding_model": "E:\\毕业论文\\memory-rerank\\.cache\\models\\bge-m3"
+  },
+  "ingest": [
+    {
+      "task_id": "address_current",
+      "source_memory_id": "a_old",
+      "input": "10月，我的收货地址是杭州。",
+      "result": {
+        "results": [
+          {
+            "id": "955d2fc9-daa4-4ff3-a101-56a4b810aee7",
+            "memory": "User's delivery address for October is in Hangzhou, China",
+            "event": "ADD"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "address_current",
+      "source_memory_id": "a_new",
+      "input": "11月10日起，我的收货地址改为上海。",
+      "result": {
+        "results": [
+          {
+            "id": "b6ebeedb-5038-42a7-8b5a-f05fd2526387",
+            "memory": "User's delivery address changed to Shanghai starting November 10, 2026, replacing the previous Hangzhou address used in October",
+            "event": "ADD"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "address_current",
+      "source_memory_id": "a_story",
+      "input": "我以前住在杭州，那里有很多西湖边的回忆。",
+      "result": {
+        "results": [
+          {
+            "id": "46fc6bed-f0a5-44d2-ba0c-e8a572712fc1",
+            "memory": "User previously lived in Hangzhou, China, and has many memories of the West Lake (西湖) area there",
+            "event": "ADD"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "address_history",
+      "source_memory_id": "h_old",
+      "input": "10月，我的收货地址是杭州。",
+      "result": {
+        "results": [
+          {
+            "id": "b477f5fe-01b4-49cd-8d72-a7513da11d87",
+            "memory": "User's delivery address for October is in Hangzhou, China",
+            "event": "ADD"
+          }
+        ]
+      }
+    },
+    {
+      "task_id": "address_history",
+      "source_memory_id": "h_new",
+      "input": "11月10日起，我的收货地址改为上海。",
+      "result": {
+        "results": [
+          {
+            "id": "7c3d0c85-a3ac-401f-aa0c-1d79f9efb383",
+            "memory": "User's delivery address changed to Shanghai starting November 10, 2026, replacing the previous Hangzhou address used in October",
+            "event": "ADD"
+          }
+        ]
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "address_current",
+      "stored": {
+        "results": [
+          {
+            "id": "46fc6bed-f0a5-44d2-ba0c-e8a572712fc1",
+            "memory": "User previously lived in Hangzhou, China, and has many memories of the West Lake (西湖) area there",
+            "hash": "6e5ff42b99fb50b238d02eef4a49f78d",
+            "metadata": {
+              "source_memory_id": "a_story"
+            },
+            "created_at": "2026-11-11T09:00:00+08:00",
+            "updated_at": "2026-11-11T09:00:00+08:00",
+            "user_id": "address_current",
+            "attributed_to": "user"
+          },
+          {
+            "id": "955d2fc9-daa4-4ff3-a101-56a4b810aee7",
+            "memory": "User's delivery address for October is in Hangzhou, China",
+            "hash": "fe0e01f895c44cc9014ade70e220a42d",
+            "metadata": {
+              "source_memory_id": "a_old"
+            },
+            "created_at": "2026-10-01T09:00:00+08:00",
+            "updated_at": "2026-10-01T09:00:00+08:00",
+            "user_id": "address_current",
+            "attributed_to": "user"
+          },
+          {
+            "id": "b6ebeedb-5038-42a7-8b5a-f05fd2526387",
+            "memory": "User's delivery address changed to Shanghai starting November 10, 2026, replacing the previous Hangzhou address used in October",
+            "hash": "67e418d0a91dc8cd4079a557321af2fc",
+            "metadata": {
+              "source_memory_id": "a_new"
+            },
+            "created_at": "2026-11-10T09:00:00+08:00",
+            "updated_at": "2026-11-10T09:00:00+08:00",
+            "user_id": "address_current",
+            "attributed_to": "user"
+          }
+        ]
+      },
+      "queries": [
+        {
+          "query": {
+            "query_id": "address_now",
+            "text": "今天的快递寄到哪里？",
+            "query_time": "2026-11-13T10:00:00+08:00",
+            "task_tags": [
+              "delivery",
+              "address"
+            ],
+            "relevance_grades": {
+              "a_new": 3,
+              "a_old": 0,
+              "a_story": 0
+            },
+            "obsolete_ids": [
+              "a_old"
+            ],
+            "required_evidence_sets": [
+              [
+                "a_new"
+              ]
+            ]
+          },
+          "result": {
+            "results": [
+              {
+                "id": "955d2fc9-daa4-4ff3-a101-56a4b810aee7",
+                "memory": "User's delivery address for October is in Hangzhou, China",
+                "hash": "fe0e01f895c44cc9014ade70e220a42d",
+                "metadata": {
+                  "source_memory_id": "a_old"
+                },
+                "score": 0.6122320264829414,
+                "created_at": "2026-10-01T09:00:00+08:00",
+                "updated_at": "2026-10-01T09:00:00+08:00",
+                "user_id": "address_current",
+                "attributed_to": "user",
+                "score_details": {
+                  "semantic_score": 0.6122320264829414,
+                  "bm25_score": 0.0,
+                  "entity_boost": 0.0,
+                  "raw_score": 0.6122320264829414,
+                  "max_possible_score": 1.0,
+                  "final_score": 0.6122320264829414,
+                  "threshold": 0.1
+                }
+              },
+              {
+                "id": "b6ebeedb-5038-42a7-8b5a-f05fd2526387",
+                "memory": "User's delivery address changed to Shanghai starting November 10, 2026, replacing the previous Hangzhou address used in October",
+                "hash": "67e418d0a91dc8cd4079a557321af2fc",
+                "metadata": {
+                  "source_memory_id": "a_new"
+                },
+                "score": 0.5710268017722058,
+                "created_at": "2026-11-10T09:00:00+08:00",
+                "updated_at": "2026-11-10T09:00:00+08:00",
+                "user_id": "address_current",
+                "attributed_to": "user",
+                "score_details": {
+                  "semantic_score": 0.5710268017722058,
+                  "bm25_score": 0.0,
+                  "entity_boost": 0.0,
+                  "raw_score": 0.5710268017722058,
+                  "max_possible_score": 1.0,
+                  "final_score": 0.5710268017722058,
+                  "threshold": 0.1
+                }
+              },
+              {
+                "id": "46fc6bed-f0a5-44d2-ba0c-e8a572712fc1",
+                "memory": "User previously lived in Hangzhou, China, and has many memories of the West Lake (西湖) area there",
+                "hash": "6e5ff42b99fb50b238d02eef4a49f78d",
+                "metadata": {
+                  "source_memory_id": "a_story"
+                },
+                "score": 0.42787204580065286,
+                "created_at": "2026-11-11T09:00:00+08:00",
+                "updated_at": "2026-11-11T09:00:00+08:00",
+                "user_id": "address_current",
+                "attributed_to": "user",
+                "score_details": {
+                  "semantic_score": 0.42787204580065286,
+                  "bm25_score": 0.0,
+                  "entity_boost": 0.0,
+                  "raw_score": 0.42787204580065286,
+                  "max_possible_score": 1.0,
+                  "final_score": 0.42787204580065286,
+                  "threshold": 0.1
+                }
+              }
+            ]
+          },
+          "ranked_source_ids": [
+            "a_old",
+            "a_new",
+            "a_story"
+          ],
+          "gold_rank": 2,
+          "mrr": 0.5,
+          "stale_ids_in_top5": [
+            "a_old"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "address_history",
+      "stored": {
+        "results": [
+          {
+            "id": "7c3d0c85-a3ac-401f-aa0c-1d79f9efb383",
+            "memory": "User's delivery address changed to Shanghai starting November 10, 2026, replacing the previous Hangzhou address used in October",
+            "hash": "67e418d0a91dc8cd4079a557321af2fc",
+            "metadata": {
+              "source_memory_id": "h_new"
+            },
+            "created_at": "2026-11-10T09:00:00+08:00",
+            "updated_at": "2026-11-10T09:00:00+08:00",
+            "user_id": "address_history",
+            "attributed_to": "user"
+          },
+          {
+            "id": "b477f5fe-01b4-49cd-8d72-a7513da11d87",
+            "memory": "User's delivery address for October is in Hangzhou, China",
+            "hash": "fe0e01f895c44cc9014ade70e220a42d",
+            "metadata": {
+              "source_memory_id": "h_old"
+            },
+            "created_at": "2026-10-01T09:00:00+08:00",
+            "updated_at": "2026-10-01T09:00:00+08:00",
+            "user_id": "address_history",
+            "attributed_to": "user"
+          }
+        ]
+      },
+      "queries": [
+        {
+          "query": {
+            "query_id": "address_then",
+            "text": "10月的收货地址是什么？",
+            "query_time": "2026-11-13T10:00:00+08:00",
+            "target_time": "2026-10-20T10:00:00+08:00",
+            "task_tags": [
+              "delivery",
+              "history"
+            ],
+            "relevance_grades": {
+              "h_old": 3,
+              "h_new": 0
+            },
+            "obsolete_ids": [
+              "h_new"
+            ],
+            "required_evidence_sets": [
+              [
+                "h_old"
+              ]
+            ]
+          },
+          "result": {
+            "results": [
+              {
+                "id": "b477f5fe-01b4-49cd-8d72-a7513da11d87",
+                "memory": "User's delivery address for October is in Hangzhou, China",
+                "hash": "fe0e01f895c44cc9014ade70e220a42d",
+                "metadata": {
+                  "source_memory_id": "h_old"
+                },
+                "score": 0.7854319496628172,
+                "created_at": "2026-10-01T09:00:00+08:00",
+                "updated_at": "2026-10-01T09:00:00+08:00",
+                "user_id": "address_history",
+                "attributed_to": "user",
+                "score_details": {
+                  "semantic_score": 0.7854319496628172,
+                  "bm25_score": 0.0,
+                  "entity_boost": 0.0,
+                  "raw_score": 0.7854319496628172,
+                  "max_possible_score": 1.0,
+                  "final_score": 0.7854319496628172,
+                  "threshold": 0.1
+                }
+              },
+              {
+                "id": "7c3d0c85-a3ac-401f-aa0c-1d79f9efb383",
+                "memory": "User's delivery address changed to Shanghai starting November 10, 2026, replacing the previous Hangzhou address used in October",
+                "hash": "67e418d0a91dc8cd4079a557321af2fc",
+                "metadata": {
+                  "source_memory_id": "h_new"
+                },
+                "score": 0.6301186918586312,
+                "created_at": "2026-11-10T09:00:00+08:00",
+                "updated_at": "2026-11-10T09:00:00+08:00",
+                "user_id": "address_history",
+                "attributed_to": "user",
+                "score_details": {
+                  "semantic_score": 0.6301186918586312,
+                  "bm25_score": 0.0,
+                  "entity_boost": 0.0,
+                  "raw_score": 0.6301186918586312,
+                  "max_possible_score": 1.0,
+                  "final_score": 0.6301186918586312,
+                  "threshold": 0.1
+                }
+              }
+            ]
+          },
+          "ranked_source_ids": [
+            "h_old",
+            "h_new"
+          ],
+          "gold_rank": 1,
+          "mrr": 1.0,
+          "stale_ids_in_top5": [
+            "h_new"
+          ]
+        }
+      ]
+    }
+  ]
+}
