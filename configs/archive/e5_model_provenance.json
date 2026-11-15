@@ -1,7 +1,0 @@
-{
-  "model": "intfloat/multilingual-e5-small",
-  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
-  "license": "mit",
-  "source": "https://huggingface.co/intfloat/multilingual-e5-small",
-  "accessed_on": "2026-11-13"
-}

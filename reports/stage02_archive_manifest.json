@@ -1,6 +1,0 @@
-{
-  "file": "stage02_raw_runs.zip",
-  "sha256": "0647cddcbc9a329399b8e38a6ae4c39b2d7f07e3e07b76d33aa2cc0fbd11693b",
-  "bytes": 379146,
-  "description": "Recorded smoke-run scores and metrics; no raw conversation text; source query text retained in run query records. No official benchmark claim."
-}

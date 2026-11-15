@@ -53,8 +53,6 @@
 | 结果 | [`experiments/mem0/results/`](experiments/mem0/results/) |
 | 目录说明与运行命令 | [`experiments/mem0/README.md`](experiments/mem0/README.md) |
 
-仓库中另有旧版 0.1.59 的四操作对照文件（`code/run_pipeline_demo.py`、`results/demo/`），仅作历史对照；最新版结论以 `REPRODUCTION.md` 为准。
-
 ## 仓库结构
 
 ```text

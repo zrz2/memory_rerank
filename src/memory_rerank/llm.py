@@ -32,13 +32,15 @@ class DeepSeekClient:
     def configured(self) -> bool:
         return bool(read_key(self.root, self.config["api_key_env"]))
 
-    def chat(self, messages: list[dict], *, max_tokens: int | None = None) -> dict:
+    def chat(self, messages: list[dict], *, max_tokens: int | None = None, response_format: dict | None = None) -> dict:
         key = read_key(self.root, self.config["api_key_env"])
         if not key:
             raise RuntimeError("DEEPSEEK_API_KEY is missing. Set it in the project .env or process environment.")
         payload = {"model": self.config["model"], "messages": messages,
                    "temperature": self.config["temperature"], "stream": False,
                    "max_tokens": max_tokens or self.config["max_tokens"]}
+        if response_format is not None:
+            payload["response_format"] = response_format
         if "thinking" in self.config:
             payload["thinking"] = self.config["thinking"]
         request = urllib.request.Request(self.config["base_url"] + "/chat/completions",
